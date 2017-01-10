@@ -1,3 +1,7 @@
-/**
- * Created by nadi on 10.01.17.
- */
+var HomeController = {
+    index: (req, res) => {
+        res.render('index');
+        //res.send({'Bla': 1});
+    }
+};
+module.exports = HomeController;

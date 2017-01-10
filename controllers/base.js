@@ -1,11 +1,11 @@
-let homeController = ('./home');
-let usersController = ('./home');
-let ordersController = ('./home');
+let homeController = require('./home');
+let usersController = require('./users');
+let ordersController = require('./orders');
 
-let baseController = {
+let BaseController = {
     home: homeController,
     users: usersController,
     orders: ordersController
 };
 
-module.exports = baseController;
+module.exports = BaseController;
