@@ -1,3 +1,6 @@
-/**
- * Created by nadi on 10.01.17.
- */
+let OrdersController = {
+    create: (req, res) => {
+        res.render('order-create');
+    }
+};
+module.exports = OrdersController;
