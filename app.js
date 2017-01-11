@@ -1,20 +1,20 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 let app = express();
-let config = require('./config/config');
-//let config = require('./server/config/config')[env]
 let routes = require('./routes')(app);
 
 //configuration
 let env = process.env.NODE_ENV || 'development';
-let port = process.env.PORT || '8000';
-app.set('port', port);
-app.set('superSecret', config.secret);
-
-// view engine setup
-const path = require('path');
+let config = require('./config/config');
+//let config = require('./config/config')[env]
+app.set('port', config.port);
+//app.set('superSecret', config.secret);
+//app.use(express.static(config.rootPath + 'public'))
+app.use(bodyParser.urlencoded({extended: true}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.listen(config.port);
-console.log('Express listen!');
+console.log('Express listen on port ' + config.port);
 
