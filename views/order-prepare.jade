@@ -4,24 +4,22 @@ html(lang="en")
         script (src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
         link(rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
         script (src = 'https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js')
-        script( type='text/javascript' src="/javascript/order-prepare.js")
-
 body
+    - var wordsNumber = 0;
+    script( type='text/javascript' src="/javascript/order-prepare.js")
     #insert-text-container
         textarea.
             Type your text here...
         label(class = 'btn btn-default btn-file')
             Upload file
-            input#fileInput(type='file', class='hidden' onchange='wordsCount')
+            input#fileInput(type='file', class='hidden' onchange='wordsCount(this)')
 
-//</div>
-//<div>
-//    <ul>
-//        <li>words</li>
-//        <li>language</li>
-//        <li>quality level</li>
-//        <li>price</li>
-//    </ul>
-//</div>
-//<button>Choose language</button>
+
+    div#content
+        ul
+            li words #{wordsNumber}
+            li language
+            li quality level
+            li price
+        button Choose language
 
