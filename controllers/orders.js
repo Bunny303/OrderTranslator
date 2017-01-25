@@ -4,7 +4,13 @@ let OrdersController = {
     },
 
     prepare: (req, res) => {
-        res.render('order-prepare');
+        res.render('order-prepare', {wordsCount: 0});
+    },
+
+    fileManage: (req, res) => {
+        console.log(req.body);
+        console.log(req.file);
+        res.redirect('/order');
     }
 };
 module.exports = OrdersController;
