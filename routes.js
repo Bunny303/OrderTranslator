@@ -5,6 +5,7 @@ let Routes = (app) => {
     app.get('/', controllers.home.index);
     app.get('/order-create', controllers.orders.create);
     app.get('/order', controllers.orders.prepare);
+    app.get('/order/:wordsCount', controllers.orders.prepare);
     app.post('/fileUpload', controllers.orders.fileManage);
 
 
