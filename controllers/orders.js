@@ -1,4 +1,5 @@
-let fs = require('fs');
+const fs = require('fs');
+const Tesseract = require('tesseract.js')
 
 let OrdersController = {
     create: (req, res) => {
@@ -15,11 +16,11 @@ let OrdersController = {
         let wordsCount = 0;
 
         if (file) {
-            var resultText;
+            let resultText;
             //If uploaded file is picture, we will try to recognize the text inside
             if (file['mimetype'].split('/')[0] == 'image') {
                 //todo: test with different languages
-                Tesseract.recognize(file)
+                Tesseract.recognize(file.path)
                     .then(function (result) {
                         resultText = result.text;
                         //calculate number of words
@@ -27,7 +28,7 @@ let OrdersController = {
                         res.redirect('/order/' + wordsCount);
                     })
                     .catch(function (err) {
-                        console.error(err);
+                        console.error("Error:" + err);
                     });
             }
             else {
