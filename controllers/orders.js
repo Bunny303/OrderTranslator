@@ -6,9 +6,14 @@ let OrdersController = {
         res.send({status: 1});
     },
 
-    prepare: (req, res) => {
+    prepareDocument: (req, res) => {
         let wordsCount = req.params['wordsCount'] || 0;
-        res.render('order-prepare', {wordsCount: wordsCount});
+        res.render('document-upload', {wordsCount: wordsCount});
+    },
+
+    prepareLanguages: (req, res) => {
+        let wordsCount = req.params['wordsCount'] || 0;
+        res.render('languages');
     },
 
     fileManage: (req, res) => {

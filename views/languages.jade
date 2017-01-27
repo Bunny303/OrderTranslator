@@ -1,0 +1,15 @@
+extends ./base
+block page-content
+    div
+        div#from-language
+            div(class="dropdown")
+                button(class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Choose a language
+                    span(class="caret")
+                ul(class="dropdown-menu" aria-labelledby="dropdownMenu1")
+                    li
+                        a(href="#") French
+                    li
+                        a(href="#") Bulgarian
+        div#to-language
+        button Choose options
+    include price-calculator.jade

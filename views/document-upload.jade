@@ -1,0 +1,22 @@
+extends ./base
+block page-content
+    div#insert-text-container
+        textarea#userText.
+            Type your text here...
+        div#textarea-words-count
+
+        script.
+            $("#userText").on('keyup', function () {
+                var words = this.value.match(/\S+/g).length;
+                $('#textarea-words-count').text(words);
+            });
+
+        form#fileUpload(name="fileUpload", action="/fileUpload", method="post", enctype="multipart/form-data")
+            input#fileInput(type='file' name="userDocument")
+            button(type="submit") Upload
+        a(href="/order/languages") Choose language
+
+    include price-calculator.jade
+
+
+
