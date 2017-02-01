@@ -7,6 +7,22 @@ html(lang="bg")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     body
-        block navigation
-        block page-content
-        block footer
+        .container
+            ul.menu
+                li
+                    a(href="/") Home
+                li
+                    a(href="/about") About
+                li.delimiter
+                if (currentUser)
+                    li
+                        span= currentUser.username
+                    li
+                        form#logout-form(method="post" action="/users/logout")
+                            a(href="javascript:document.getElementById('logout-form').submit()") Logout
+                else
+                    li
+                        a(href="/users/register") Register
+                    li
+                        a(href="/users/login") Log In
+            block main-content
