@@ -8,8 +8,12 @@ let Routes = (app) => {
     app.get('/users/register', controllers.users.register);
     app.get('/users/login', controllers.users.login);
     app.post('/users/logout', controllers.users.logout);
-    //app.post('/users/create', controllers.users.create);
-    //app.post('/users/authenticate', controllers.users.authenticate);
+    app.post('/users/create', controllers.users.create);
+    app.post('/users/authenticate', controllers.users.authenticate);
+
+    //app.all('/:controller/:method/:id', (req, res) =>{
+    // controllers[req.params.controller].req.params.method(id)
+    // })
 
     //order routes
     app.get('/order-create', controllers.orders.create);

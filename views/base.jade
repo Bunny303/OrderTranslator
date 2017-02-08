@@ -25,4 +25,6 @@ html(lang="bg")
                         a(href="/users/register") Register
                     li
                         a(href="/users/login") Log In
+            if (globalError)
+                h3= globalError
             block main-content
