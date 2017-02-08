@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./config/database')(config);
 require('./models/User');
 require('./routes')(app);
-//require('./server/config/passport')();
+require('./config/passport')();
 
 app.listen(config.port);
 console.log('Express listen on port ' + config.port);
