@@ -15,7 +15,22 @@ app.set('port', config.port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(multer({dest: './uploads/'}).single('userDocument'));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+    secret: 'neshto-taino!@#$%',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+    if (req.user) {
+        res.locals.currentUser = req.user;
+    }
+
+    next()
+});
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('./config/database')(config);
