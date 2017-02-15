@@ -43,17 +43,21 @@ let UsersController = {
         User
             .findOne({username: inputUser.username})
             .then(user => {
+
                 //todo: unhandled error when username is wrong
                 if (!user.authenticate(inputUser.password)) {
                     res.render('users/login', {globalError: 'Invalid username or password'});
                 }
                 else {
+
                     req.logIn(user, (err, user) => {
+
                         if (err) {
                             res.render('users/login', {globalError: 'Ooops 500'});
                             return;
                         }
 
+                        console.log(user);
                         res.redirect('/');
                     })
                 }

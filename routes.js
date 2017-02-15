@@ -7,7 +7,7 @@ let Routes = (app) => {
     //user routes
     app.get('/users/register', controllers.users.register);
     app.get('/users/login', controllers.users.login);
-    app.post('/users/logout', controllers.users.logout);
+    app.get('/users/logout', controllers.users.logout);
     app.post('/users/create', controllers.users.create);
     app.post('/users/authenticate', controllers.users.authenticate);
 

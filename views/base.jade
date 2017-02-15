@@ -25,16 +25,10 @@ html(lang="bg")
                                 a(href="/contact") Contacts
                         ul(class="nav navbar-nav navbar-right")
                             if (currentUser)
-                                li(class="dropdown")
-                                    a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= currentUser.username
-                                    span(class="caret")
-                                    ul(class="dropdown-menu")
-                                        li
-                                            a(href="/profile") Edit profile
-                                        li(role="separator" class="divider")
-                                        li
-                                            form#logout-form(method="post" action="/users/logout")
-                                                a(href="javascript:document.getElementById('logout-form').submit()") Logout
+                                li
+                                    a(href="/profile") Edit profile
+                                li
+                                    a(href="/users/logout") Logout
                             else
                                 li
                                     a(href="/users/login") Log In
