@@ -56,8 +56,6 @@ let UsersController = {
                             res.render('users/login', {globalError: 'Ooops 500'});
                             return;
                         }
-
-                        console.log(user);
                         res.redirect('/');
                     })
                 }

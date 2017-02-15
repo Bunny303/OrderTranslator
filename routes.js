@@ -3,6 +3,7 @@ const controllers = require('./controllers/base');
 let Routes = (app) => {
 
     app.get('/', controllers.home.index);
+    app.get('/contact', controllers.home.contact);
 
     //user routes
     app.get('/users/register', controllers.users.register);
