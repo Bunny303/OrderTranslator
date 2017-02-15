@@ -20,20 +20,20 @@ html(lang="bg")
                     div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
                         ul(class="nav navbar-nav")
                             li(class="active")
-                                a(href="/") Home
+                                a(href="/") Начало
                             li
-                                a(href="/contact") Contacts
+                                a(href="/contact") Контакти
                         ul(class="nav navbar-nav navbar-right")
                             if (currentUser)
                                 li
-                                    a(href="/profile") Edit profile
+                                    a(href="/profile") Настойки профил
                                 li
-                                    a(href="/users/logout") Logout
+                                    a(href="/users/logout") Изход
                             else
                                 li
-                                    a(href="/users/login") Log In
+                                    a(href="/users/login") Вход
                                 li
-                                    a(href="/users/register") Register
+                                    a(href="/users/register") Регистрация
 
             if (globalError)
                 h3= globalError
