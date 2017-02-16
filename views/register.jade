@@ -1,25 +1,25 @@
 extends ./base
 block main-content
-    h1 Create new user
+    h1 Регистрация на нов потребител
     form(method="post" action="/users/create")
-        label(for="username") Username
+        label(for="username") Име
         br
         input(type="text" name="username" id="username" value=username)
         br
-        label(for="password") Password
+        label(for="password") Парола
         br
         input(type="password" name="password" id="password")
         br
-        label(for="confirm-password") Confirm Password
+        label(for="confirm-password") Потвърди паролата
         br
         input(type="password" name="confirmPassword" id="confirm-password")
         br
-        label(for="first-name") First Name
+        label(for="first-name") Име
         br
         input(type="text" name="firstName" id="first-name")
         br
-        label(for="last-name") Last Name
+        label(for="last-name") Фамилия
         br
         input(type="text" name="lastName" id="last-name")
         br
-        input(type="submit" value="Create")
+        input(type="submit" value="Регистрирай")

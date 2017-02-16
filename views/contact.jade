@@ -3,17 +3,17 @@ extends ./base
 block main-content
     h3 Свържете се с нас
     p Кажете ни от какво имате нужда и ние ще се свържем с вас при първа възможност
-    form
+    form(action="contact/send" method="post")
         div(class="form-group")
             label(for="username") Име
-            input(type="text" class="form-control" id="username")
+            input(type="text" class="form-control" id="username" name="username")
         div(class="form-group")
             label(for="email") Електронна поща
-            input(type="text" class="form-control" id="email")
+            input(type="text" class="form-control" id="email" name="email")
         div(class="form-group")
             label(for="subject") Заглавие
-            input(type="text" class="form-control" id="subject")
+            input(type="text" class="form-control" id="subject" name="subject")
         div(class="form-group")
             label(for="description") Описание
-            input(type="text" class="form-control" id="description" rows="3")
-        button(type="submit" class="btn btn-primary") Изпрати
+            input(type="text" class="form-control" id="description" rows="3" name="description")
+        input(type="submit" class="btn btn-primary" value="Изпрати")

@@ -4,6 +4,7 @@ let Routes = (app) => {
 
     app.get('/', controllers.home.index);
     app.get('/contact', controllers.home.contact);
+    app.post('/contact/send', controllers.home.sendMessage);
 
     //user routes
     app.get('/users/register', controllers.users.register);
