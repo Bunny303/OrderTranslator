@@ -2,12 +2,10 @@ extends ./base
 block main-content
     h1 Вход за потребители
     form(method="post" action="/users/authenticate")
-        label(for="username") Име
-        br
-        input(type="text" name="username" id="username")
-        br
-        label(for="password") Парола
-        br
-        input(type="password" name="password" id="password")
-        br
-        input(type="submit" value="Влез")
+        div(class="form-group")
+            label(for="username") Име
+            input(type="text" class="form-control" id="username" name="username")
+        div(class="form-group")
+            label(for="password") Парола
+            input(type="password" class="form-control" id="password" name="password")
+        input(type="submit" class="btn btn-primary" value="Влез")

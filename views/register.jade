@@ -2,24 +2,19 @@ extends ./base
 block main-content
     h1 Регистрация на нов потребител
     form(method="post" action="/users/create")
-        label(for="username") Име
-        br
-        input(type="text" name="username" id="username" value=username)
-        br
-        label(for="password") Парола
-        br
-        input(type="password" name="password" id="password")
-        br
-        label(for="confirm-password") Потвърди паролата
-        br
-        input(type="password" name="confirmPassword" id="confirm-password")
-        br
-        label(for="first-name") Име
-        br
-        input(type="text" name="firstName" id="first-name")
-        br
-        label(for="last-name") Фамилия
-        br
-        input(type="text" name="lastName" id="last-name")
-        br
-        input(type="submit" value="Регистрирай")
+        div(class="form-group")
+            label(for="username") Име
+            input(type="text" class="form-control" id="username" name="username")
+        div(class="form-group")
+            label(for="password") Парола
+            input(type="password" class="form-control" id="password" name="password")
+        div(class="form-group")
+            label(for="confirm-password") Повтори паролата
+            input(type="confirm-password" class="form-control" id="confirm-password" name="confirm-password")
+        div(class="form-group")
+            label(for="first-name") Име
+            input(type="text" class="form-control" id="first-name" name="first-name")
+        div(class="form-group")
+            label(for="last-name") Фамилия
+            input(type="text" class="form-control" id="last-name" name="last-name")
+        input(type="submit" class="btn btn-primary" value="Регистрация")
