@@ -1,22 +1,50 @@
 extends ./base
 block main-content
-    div#insert-text-container
-        textarea#userText.
-            Type your text here...
-        div#textarea-words-count
+    div(class="row")
+        div(class="col-xs-12 col-md-8")
+            textarea#userText.
+                Type your text here...
+            div#textarea-words-count
 
-        script.
-            $("#userText").on('keyup', function () {
-                var words = this.value.match(/\S+/g).length;
-                $('#textarea-words-count').text(words);
-            });
+            script.
+                $("#userText").on('keyup', function () {
+                    var words = this.value.match(/\S+/g).length;
+                    $('#textarea-words-count').text(words);
+                });
 
-        form#fileUpload(name="fileUpload", action="/fileUpload", method="post", enctype="multipart/form-data")
-            input#fileInput(type='file' name="userDocument")
-            button(type="submit") Upload
-        a(href="/order/languages") Choose language
+            //label(class="btn btn-default btn-file") Browse
+            //    input( type="file" id="userDocument" name="userDocument" style="display: none;")
 
-    include price-calculator.jade
+            form#fileUpload(name="fileUpload", action="/fileUpload", method="post", enctype="multipart/form-data")
+                input#fileInput(type='file' name="userDocument")
+                button(type="submit") Избери файл
 
+            - var languages = ["Френски", "Български"];
+            div#from-language
+                h3 Преведи от
+                select(class="form-control")
+                    each language in languages
+                        option(value="#{language}") #{language}
+            div#to-language
+                h3 Преведи на
+                select(class="form-control")
+                    each language in languages
+                        option(value="#{language}") #{language}
 
+            div#quality-level
+                h3 Ниво на трудност
+                - var qualityLevel;
+                - var levels = ["Стандартно", "Техническо"];
+                select(class="form-control")
+                    each level in levels
+                        - qualityLevel = level;
+                        option(value="#{level}") #{level}
 
+        div(class="col-xs-6 col-md-4")
+            ul
+                li брой думи #{wordsCount}
+                li ниво на трудност: #{qualityLevel}
+                li цена на дума
+                li Обща цена
+
+    a Потвърди поръчката
