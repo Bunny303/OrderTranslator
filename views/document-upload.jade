@@ -44,7 +44,11 @@ block main-content
             ul
                 li брой думи #{wordsCount}
                 li ниво на трудност: #{qualityLevel}
-                li цена на дума
-                li Обща цена
+                - var pricePerWord = 0.07;
+                if qualityLevel == 'Стандартно'
+                    pricePerWord = 0.05
+                li цена на дума #{pricePerWord} лв
+                - var totalPrice = Number((wordsCount * pricePerWord).toFixed(2));
+                li Обща цена #{totalPrice} лв
 
     a Потвърди поръчката

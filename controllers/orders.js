@@ -7,13 +7,8 @@ let OrdersController = {
     },
 
     prepareDocument: (req, res) => {
-        let wordsCount = req.params['wordsCount'] || 0;
-        res.render('document-upload', {wordsCount: wordsCount});
-    },
-
-    prepareLanguages: (req, res) => {
-        let wordsCount = req.params['wordsCount'] || 0;
-        res.render('languages');
+        //let wordsCount = req.params['wordsCount'] || 0;
+        res.render('document-upload');
     },
 
     fileManage: (req, res) => {
@@ -30,7 +25,8 @@ let OrdersController = {
                         resultText = result.text;
                         //calculate number of words
                         wordsCount = resultText.split(" ").length;
-                        res.redirect('/order/' + wordsCount);
+                        //res.redirect('/order/' + wordsCount);
+                        res.render('document-upload', {wordsCount: wordsCount})
                     })
                     .catch(function (err) {
                         console.error("Error:" + err);
@@ -45,7 +41,8 @@ let OrdersController = {
                     if (!err) {
                         //calculate number of words
                         wordsCount = data.split(" ").length;
-                        res.redirect('/order/' + wordsCount);
+                        res.render('document-upload', {wordsCount: wordsCount});
+                        //res.redirect('/order/' + wordsCount);
                     }
                     else {
                         console.log(err);
