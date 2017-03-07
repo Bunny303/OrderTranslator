@@ -1,4 +1,5 @@
 const controllers = require('./controllers/base');
+const auth = require('./config/auth');
 
 let Routes = (app) => {
 
@@ -18,7 +19,7 @@ let Routes = (app) => {
     // })
 
     //order routes
-    app.get('/order-create', controllers.orders.create);
+    app.get('/order-create', auth.isAuthenticated, controllers.orders.create);
     app.get('/order', controllers.orders.prepareDocument);
     //app.get('/order/:wordsCount(\\d+)', controllers.orders.prepareDocument);
     app.post('/fileUpload', controllers.orders.fileManage);

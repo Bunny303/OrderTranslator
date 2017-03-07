@@ -2,14 +2,20 @@ extends ./base
 block main-content
     div(class="row")
         div(class="col-xs-12 col-md-8")
+            h2 Стъпка 1 Въведи текст или добави файл
             textarea#userText.
                 Type your text here...
-            div#textarea-words-count
+
+            - qualityLevel = qualityLevel || "Стандартно";
+            - pricePerWord = pricePerWord || 0.05;
+            - let totalPrice = Number(((wordsCount ||0)* pricePerWord).toFixed(2));
 
             script.
                 $("#userText").on('keyup', function () {
                     var words = this.value.match(/\S+/g).length;
-                    $('#textarea-words-count').text(words);
+                    $('#words-count').text(words);
+                    wordsCount = words;
+                    $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
                 });
 
             //label(class="btn btn-default btn-file") Browse
@@ -19,36 +25,46 @@ block main-content
                 input#fileInput(type='file' name="userDocument")
                 button(type="submit") Избери файл
 
+            h2 Стъпка 2 Избери език
             - var languages = ["Френски", "Български"];
             div#from-language
-                h3 Преведи от
+                p Преведи от
                 select(class="form-control")
                     each language in languages
                         option(value="#{language}") #{language}
             div#to-language
-                h3 Преведи на
+                p Преведи на
                 select(class="form-control")
                     each language in languages
                         option(value="#{language}") #{language}
 
-            div#quality-level
-                h3 Ниво на трудност
-                - var qualityLevel;
-                - var levels = ["Стандартно", "Техническо"];
-                select(class="form-control")
+            h2 Стъпка 3 Избери ниво на трудност
+            div
+                - let levels = ["Стандартно", "Техническо"];
+                select(class="form-control" id="quality-level-container")
                     each level in levels
-                        - qualityLevel = level;
                         option(value="#{level}") #{level}
+
+            script.
+                $("#quality-level-container").on('change', function () {
+                    qualityLevel = $(this).val();
+                    $('#quality-level').text(qualityLevel);
+                    if (qualityLevel == 'Стандартно') {
+                        pricePerWord = 0.05;
+                    }
+                    else {
+                        pricePerWord = 0.07;
+                    }
+
+                    $('#price-per-word').text(pricePerWord);
+                    $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
+                });
 
         div(class="col-xs-6 col-md-4")
             ul
-                li брой думи #{wordsCount}
-                li ниво на трудност: #{qualityLevel}
-                - var pricePerWord = 0.07;
-                if qualityLevel == 'Стандартно'
-                    pricePerWord = 0.05
-                li цена на дума #{pricePerWord} лв
-                - var totalPrice = Number((wordsCount * pricePerWord).toFixed(2));
-                li Обща цена #{totalPrice} лв
+                li брой думи: <span id="words-count">#{wordsCount || 0}</span>
+                li ниво на трудност: <span id="quality-level">#{qualityLevel}</span>
+                li цена на дума: <span id="price-per-word">#{pricePerWord}</span>лв
+                li Обща цена: <span id="total-price">#{totalPrice}</span>лв
 
-    a Потвърди поръчката
+    a(href='/order-create') Направи заявка
