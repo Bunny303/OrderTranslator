@@ -3,6 +3,9 @@ let configauth = {
         if (req.isAuthenticated()) {
             next();
         } else {
+            if (req.session) {
+                req.session.redirectUrl = req.originalUrl || req.url;
+            }
             res.redirect('/users/login');
         }
     },

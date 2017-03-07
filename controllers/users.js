@@ -31,7 +31,6 @@ let UsersController = {
                             res.render('users/register', {globalError: 'Ooops 500'});
                             return;
                         }
-
                         res.redirect('/');
                     })
                 })
@@ -56,10 +55,12 @@ let UsersController = {
                             res.render('users/login', {globalError: 'Ooops 500'});
                             return;
                         }
-                        res.redirect('/');
+                        let redirectUrl = req.session.redirectUrl || '/';
+                        console.log(redirectUrl);
+                        res.redirect(redirectUrl);
                     })
                 }
             })
-    }
+    } 
 };
 module.exports = UsersController;
