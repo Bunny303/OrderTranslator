@@ -3,6 +3,8 @@ const Tesseract = require('tesseract.js')
 
 let OrdersController = {
     create: (req, res) => {
+        console.log(req.body);
+        console.log(req.file);
         res.send({status: 1});
     },
 
@@ -42,7 +44,6 @@ let OrdersController = {
                         //calculate number of words
                         wordsCount = data.split(" ").length;
                         res.render('document-upload', {wordsCount: wordsCount});
-                        //res.redirect('/order/' + wordsCount);
                     }
                     else {
                         console.log(err);

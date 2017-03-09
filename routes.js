@@ -19,10 +19,11 @@ let Routes = (app) => {
     // })
 
     //order routes
-    app.get('/order-create', auth.isAuthenticated, controllers.orders.create);
+    //app.post('/order-create', auth.isAuthenticated, controllers.orders.create);
+    app.post('/order-create', controllers.orders.create);
     app.get('/order', controllers.orders.prepareDocument);
     //app.get('/order/:wordsCount(\\d+)', controllers.orders.prepareDocument);
-    app.post('/fileUpload', controllers.orders.fileManage);
+    //app.post('/fileUpload', controllers.orders.fileManage);
 
 
     app.all('*', (req, res) => {

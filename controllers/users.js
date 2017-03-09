@@ -61,6 +61,6 @@ let UsersController = {
                     })
                 }
             })
-    } 
+    }
 };
 module.exports = UsersController;

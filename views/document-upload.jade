@@ -2,63 +2,76 @@ extends ./base
 block main-content
     div(class="row")
         div(class="col-xs-12 col-md-8")
-            h2 Стъпка 1 Въведи текст или добави файл
-            textarea#userText.
-                Type your text here...
+            form(name="createOrder", action="/order-create", method="post", enctype="multipart/form-data")
+                h2 Стъпка 1 Въведи текст или добави файл
+                textarea(id="userText" name="userText") Type your text here...
 
-            - qualityLevel = qualityLevel || "Стандартно";
-            - pricePerWord = pricePerWord || 0.05;
-            - let totalPrice = Number(((wordsCount ||0)* pricePerWord).toFixed(2));
+                - let qualityLevel = "Стандартно";
+                - let pricePerWord = 0.05;
+                - let totalPrice = Number(((wordsCount ||0)* pricePerWord).toFixed(2));
 
-            script.
-                $("#userText").on('keyup', function () {
-                    var words = this.value.match(/\S+/g).length;
-                    $('#words-count').text(words);
-                    wordsCount = words;
-                    $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
-                });
+                script.
+                    $("#userText").on('keyup', function () {
+                        var words = this.value.match(/\S+/g).length;
+                        $('#words-count').text(words);
+                        wordsCount = words;
+                        $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
+                    });
 
-            //label(class="btn btn-default btn-file") Browse
-            //    input( type="file" id="userDocument" name="userDocument" style="display: none;")
+                input(type="file" id="user-document" name="userDocument")
 
-            form#fileUpload(name="fileUpload", action="/fileUpload", method="post", enctype="multipart/form-data")
-                input#fileInput(type='file' name="userDocument")
-                button(type="submit") Избери файл
+                script.
+                    $("#user-document").change(function (ev) {
+                        var file = ev.target.files[0];
+                        if (file) {
+                            var reader = new FileReader();
 
-            h2 Стъпка 2 Избери език
-            - var languages = ["Френски", "Български"];
-            div#from-language
-                p Преведи от
-                select(class="form-control")
-                    each language in languages
-                        option(value="#{language}") #{language}
-            div#to-language
-                p Преведи на
-                select(class="form-control")
-                    each language in languages
-                        option(value="#{language}") #{language}
+                            reader.onload = function (e) {
+                                var contents = e.target.result;
+                                var res = contents.split(" ");
+                                wordsCount = res.length;
+                                $('#words-count').text(wordsCount);
+                            };
 
-            h2 Стъпка 3 Избери ниво на трудност
-            div
-                - let levels = ["Стандартно", "Техническо"];
-                select(class="form-control" id="quality-level-container")
-                    each level in levels
-                        option(value="#{level}") #{level}
+                            reader.readAsText(file);
+                        }
+                    });
 
-            script.
-                $("#quality-level-container").on('change', function () {
-                    qualityLevel = $(this).val();
-                    $('#quality-level').text(qualityLevel);
-                    if (qualityLevel == 'Стандартно') {
-                        pricePerWord = 0.05;
-                    }
-                    else {
-                        pricePerWord = 0.07;
-                    }
+                h2 Стъпка 2 Избери език
+                - var languages = ["Френски", "Български"];
+                div#from-language
+                    p Преведи от
+                    select(class="form-control" name="fromLanguage")
+                        each language in languages
+                            option(value="#{language}") #{language}
+                div#to-language
+                    p Преведи на
+                    select(class="form-control" name="toLanguage")
+                        each language in languages
+                            option(value="#{language}") #{language}
 
-                    $('#price-per-word').text(pricePerWord);
-                    $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
-                });
+                h2 Стъпка 3 Избери ниво на трудност
+                div
+                    - let levels = ["Стандартно", "Техническо"];
+                    select(class="form-control" id="quality-level-container" name="qualityLevel")
+                        each level in levels
+                            option(value="#{level}") #{level}
+
+                script.
+                    $("#quality-level-container").on('change', function () {
+                        qualityLevel = $(this).val();
+                        $('#quality-level').text(qualityLevel);
+                        if (qualityLevel == 'Стандартно') {
+                            pricePerWord = 0.05;
+                        }
+                        else {
+                            pricePerWord = 0.07;
+                        }
+
+                        $('#price-per-word').text(pricePerWord);
+                        $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
+                    });
+                input(type="submit" class="btn btn-primary" value="Направи заявка")
 
         div(class="col-xs-6 col-md-4")
             ul
@@ -66,5 +79,3 @@ block main-content
                 li ниво на трудност: <span id="quality-level">#{qualityLevel}</span>
                 li цена на дума: <span id="price-per-word">#{pricePerWord}</span>лв
                 li Обща цена: <span id="total-price">#{totalPrice}</span>лв
-
-    a(href='/order-create') Направи заявка
