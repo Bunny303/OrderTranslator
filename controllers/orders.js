@@ -3,8 +3,25 @@ const Tesseract = require('tesseract.js')
 
 let OrdersController = {
     create: (req, res) => {
-        console.log(req.body);
-        console.log(req.file);
+        let data, file;
+
+        //if redirectBody exist it means that request comes after login required
+        if (req.session.redirectBody) {
+            data = req.session.redirectBody;
+            delete req.session.redirectBody;
+        }
+        else {
+            data = req.body;
+        }
+        //if redirectFile exist it means that request comes after login required
+        if (req.session.redirectFile) {
+            file = req.session.redirectFile;
+            delete req.session.redirectFile;
+        }
+        else {
+            file = req.file;
+        }
+
         res.send({status: 1});
     },
 

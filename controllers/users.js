@@ -55,9 +55,22 @@ let UsersController = {
                             res.render('users/login', {globalError: 'Ooops 500'});
                             return;
                         }
-                        let redirectUrl = req.session.redirectUrl || '/';
-                        console.log(redirectUrl);
-                        res.redirect(redirectUrl);
+
+                        let redirectUrl = req.session.redirectUrl;
+                        //if redirect url exist then after login we should redirect to previous page
+                        if (redirectUrl) {
+                            delete req.session.redirectUrl;
+
+                            //override body and file
+                            req.body = req.session.redirectBody;
+                            req.file = req.session.redirectFile;
+
+                            res.redirect(307, redirectUrl);
+                        }
+                        //we should redirect to home page
+                        else {
+                            res.redirect('/');
+                        }
                     })
                 }
             })

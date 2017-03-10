@@ -5,6 +5,14 @@ let configauth = {
         } else {
             if (req.session) {
                 req.session.redirectUrl = req.originalUrl || req.url;
+
+                if (req.body) {
+                    req.session.redirectBody = req.body;
+                }
+
+                if (req.file) {
+                    req.session.redirectFile = req.file;
+                }
             }
             res.redirect('/users/login');
         }
