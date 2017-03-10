@@ -1,5 +1,5 @@
-const fs = require('fs');
-const Tesseract = require('tesseract.js')
+const FileManageHelper = require('../helpers/FileManageHelper');
+const async = require('async');
 
 let OrdersController = {
     create: (req, res) => {
@@ -22,64 +22,39 @@ let OrdersController = {
             file = req.file;
         }
 
-        res.send({status: 1});
+        //if we have file uploaded we should save it and count the words
+        //todo: counting the words should be done only in one place, now it's done on front-end and on back-end
+        let wordsCount = 0;
+
+        console.log(this);
+        async.parallel([
+            function (callback) {
+                if (file) {
+                    //save file into database
+
+
+                    //count words
+                    FileManageHelper.countWords(file, callback);
+                }
+            },
+            function (callback) { //if we have text input from user we should save it into file, save file into database and count the words
+
+                //save settings for the order into database
+                callback();
+            }
+        ], function (err, results) {
+            if (err) {
+                console.log(err);
+            }
+
+            res.render('order-create', {wordsCount: results[0]});
+        });
+
+
     },
 
     prepareDocument: (req, res) => {
-        //let wordsCount = req.params['wordsCount'] || 0;
         res.render('document-upload');
-    },
-
-    fileManage: (req, res) => {
-        let file = req.file;
-        let wordsCount = 0;
-
-        if (file) {
-            let resultText;
-            //If uploaded file is picture, we will try to recognize the text inside
-            if (file['mimetype'].split('/')[0] == 'image') {
-                //todo: test with different languages
-                Tesseract.recognize(file.path)
-                    .then(function (result) {
-                        resultText = result.text;
-                        //calculate number of words
-                        wordsCount = resultText.split(" ").length;
-                        //res.redirect('/order/' + wordsCount);
-                        res.render('document-upload', {wordsCount: wordsCount})
-                    })
-                    .catch(function (err) {
-                        console.error("Error:" + err);
-                    });
-            }
-            else {
-                //if uploaded file is document (doc, txt, odt and etc.)
-                //todo: not supported by all browsers
-                //todo: test with a very big file
-
-                fs.readFile(file.path, {encoding: 'utf-8'}, function (err, data) {
-                    if (!err) {
-                        //calculate number of words
-                        wordsCount = data.split(" ").length;
-                        res.render('document-upload', {wordsCount: wordsCount});
-                    }
-                    else {
-                        console.log(err);
-                    }
-
-                });
-            }
-
-            //PDF
-            /*PDFJS.getDocument( file ).then( function(pdf) {
-             console.log(pdf);
-             });*/
-            //EXCEL No for now
-            //POWER POINT No for now
-        }
-        else {
-            res.redirect('/order');
-        }
     }
-
 };
 module.exports = OrdersController;
