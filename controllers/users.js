@@ -23,6 +23,7 @@ let UsersController = {
             user.hashedPass = CryptoHelper.generateHashedPassword(user.salt, user.password);
 
             //todo: unhandled error when user with same username already exist
+            //todo: use promises or callbacks, choose only one
             User
                 .create(user)
                 .then(user => {

@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./config/database')(config);
 require('./models/User');
+require('./models/Order');
 require('./routes')(app);
 require('./config/passport')();
 

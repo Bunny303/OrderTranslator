@@ -1,5 +1,7 @@
-const FileManageHelper = require('../helpers/FileManageHelper');
+//const FileManageHelper = require('../helpers/FileManageHelper');
 const async = require('async');
+const fs = require('fs');
+let Order = require('mongoose').model('Order');
 
 let OrdersController = {
     create: (req, res) => {
@@ -22,32 +24,74 @@ let OrdersController = {
             file = req.file;
         }
 
-        //if we have file uploaded we should save it and count the words
-        //todo: counting the words should be done only in one place, now it's done on front-end and on back-end
-        let wordsCount = 0;
-
-        console.log(this);
-        async.parallel([
+        //if we have file uploaded we should save text into db and count the words
+        async.waterfall([
             function (callback) {
+                var wordsCount;
                 if (file) {
-                    //save file into database
-
-
-                    //count words
-                    FileManageHelper.countWords(file, callback);
+                    //todo: counting the words should be done only in one place, now it's done on front-end and on back-end
+                    fs.readFile(file.path, {encoding: 'utf-8'}, function (err, data) {
+                        if (err) {
+                            callback(err);
+                        }
+                        wordsCount = data.split(" ").length;
+                        callback(null, data, wordsCount);
+                    });
+                }
+                //if we have text input from user we should save it into database and count the words
+                else if (data.userText) {
+                    //todo: check if formatting of text is kept
+                    var userText = data.userText
+                    wordsCount = userText.match(/\S+/g).length;
+                    callback(null, userText, wordsCount);
+                }
+                else {
+                    callback(new Error('No text uploaded'));
                 }
             },
-            function (callback) { //if we have text input from user we should save it into file, save file into database and count the words
+            function (userText, wordsCount, callback) {
+                //save order into database
+                var order = {
+                    userId: req.user._id,
+                    userText: userText,
+                    fromLanguage: data.fromLanguage,
+                    toLanguage: data.toLanguage,
+                    qualityLevel: data.qualityLevel,
+                    userComment: data.userComment,
+                    paid: false
+                };
 
-                //save settings for the order into database
-                callback();
+                Order.create(order, function (err, savedOrder) {
+                    if (err) {
+                        callback(err);
+                    }
+
+                    callback(null, wordsCount);
+                });
             }
-        ], function (err, results) {
+        ], function (err, wordsCount) {
             if (err) {
                 console.log(err);
             }
 
-            res.render('order-create', {wordsCount: results[0]});
+            var qualityLevel = data.qualityLevel;
+            //todo: use numbers instead of strings
+            if (qualityLevel == 'Стандартно') {
+                //todo: fix prices to be constants
+                pricePerWord = 0.05;
+            }
+            else {
+                pricePerWord = 0.07;
+            }
+
+            totalPrice = Number(pricePerWord * wordsCount).toFixed(2);
+
+            res.render('order-create', {
+                wordsCount: wordsCount,
+                qualityLevel: qualityLevel,
+                pricePerWord: pricePerWord,
+                totalPrice: totalPrice
+            });
         });
 
 
