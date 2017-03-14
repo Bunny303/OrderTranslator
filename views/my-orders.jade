@@ -1,0 +1,6 @@
+extends ./base
+block main-content
+    each order in orders
+        p #{order.userText}
+        p #{order.paid}
+        br

@@ -99,6 +99,18 @@ let OrdersController = {
 
     prepareDocument: (req, res) => {
         res.render('document-upload');
+    },
+
+    getUserOrders: (req, res) => {
+        Order.find({userId: req.user._id}, function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+
+            console.log(data);
+
+            res.render('my-orders', {orders: data});
+        });
     }
 };
 module.exports = OrdersController;

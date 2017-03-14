@@ -21,6 +21,9 @@ html(lang="bg")
                         ul(class="nav navbar-nav")
                             li(class="active")
                                 a(href="/") Начало
+                            if (currentUser)
+                                li
+                                    a(href="/my-orders") Моите поръчки
                             li
                                 a(href="/contact") Контакти
                         ul(class="nav navbar-nav navbar-right")

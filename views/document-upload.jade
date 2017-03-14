@@ -74,8 +74,4 @@ block main-content
                 input(type="submit" class="btn btn-primary" value="Направи заявка")
 
         div(class="col-xs-6 col-md-4")
-            ul
-                li брой думи: <span id="words-count">#{wordsCount || 0}</span>
-                li ниво на трудност: <span id="quality-level">#{qualityLevel}</span>
-                li цена на дума: <span id="price-per-word">#{pricePerWord}</span>лв
-                li Обща цена: <span id="total-price">#{totalPrice}</span>лв
+            include order-display
