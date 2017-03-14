@@ -8,8 +8,7 @@ const multer = require('multer');
 let app = express();
 
 let env = process.env.NODE_ENV || 'development';
-let config = require('./config/config');
-//let config = require('./config/config')[env];
+let config = require('./config/config')[env];
 
 const redis = require('redis').createClient();
 const RedisStore = require('connect-redis')(session);
@@ -24,8 +23,14 @@ app.use(session({
     secret: 'fluffybunny!@#$%',
     resave: true,
     saveUninitialized: true,
-    store: new RedisStore({host: 'localhost', port: 6379, client: redis})
+    store: new RedisStore({host: config.redis_host, port: config.redis_port, client: redis, ttl: 24 * 60 * 60})
 }));
+app.use(function (req, res, next) {
+    if (!req.session) {
+        return next(new Error('oh no session')); // handle error
+    }
+    next(); // otherwise continue
+})
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
