@@ -11,6 +11,9 @@ let env = process.env.NODE_ENV || 'development';
 let config = require('./config/config');
 //let config = require('./config/config')[env];
 
+const redis = require('redis').createClient();
+const RedisStore = require('connect-redis')(session);
+
 app.set('port', config.port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -18,9 +21,10 @@ app.use(multer({dest: './uploads/'}).single('userDocument'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
-    secret: 'neshto-taino!@#$%',
+    secret: 'fluffybunny!@#$%',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new RedisStore({host: 'localhost', port: 6379, client: redis})
 }));
 app.use(passport.initialize());
 app.use(passport.session());

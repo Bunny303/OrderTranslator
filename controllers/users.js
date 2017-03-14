@@ -10,7 +10,13 @@ let UsersController = {
     },
     logout: (req, res) => {
         req.logout();
-        res.redirect('/');
+        req.session.destroy(function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect('/');
+            }
+        });
     },
     create: (req, res) => {
         let user = req.body;
@@ -27,7 +33,7 @@ let UsersController = {
             User
                 .create(user)
                 .then(user => {
-                    req.logIn(user, (err, user) => {
+                    req.logIn(user, (err) => {
                         if (err) {
                             res.render('users/register', {globalError: 'Ooops 500'});
                             return;
@@ -50,7 +56,7 @@ let UsersController = {
                 }
                 else {
 
-                    req.logIn(user, (err, user) => {
+                    req.logIn(user, (err) => {
 
                         if (err) {
                             res.render('users/login', {globalError: 'Ooops 500'});
