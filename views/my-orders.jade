@@ -1,6 +1,17 @@
 extends ./base
 block main-content
     each order in orders
-        p #{order.userText}
-        p #{order.paid}
+        p #{order.sampleText}
+            -var confirm = order.confirm;
+            if confirm
+                p Поръчката е потвърдена
+                -var status = order.status;
+                if status == 1
+                    p Няма превод
+                else if status == 1
+                    p В процес на превеждане
+                else
+                    p Завършен превод
+            else
+                p Поръчката не е потвърдена
         br

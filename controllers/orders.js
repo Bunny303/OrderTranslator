@@ -54,11 +54,13 @@ let OrdersController = {
                 var order = {
                     userId: req.user._id,
                     userText: userText,
+                    sampleText: userText.substr(0, 100),
                     fromLanguage: data.fromLanguage,
                     toLanguage: data.toLanguage,
                     qualityLevel: data.qualityLevel,
                     userComment: data.userComment,
-                    paid: false
+                    confirm: false,
+                    status: 1
                 };
 
                 Order.create(order, function (err, savedOrder) {
@@ -102,12 +104,10 @@ let OrdersController = {
     },
 
     getUserOrders: (req, res) => {
-        Order.find({userId: req.user._id}, function (err, data) {
+        Order.find({userId: req.user._id}, ['sampleText', 'confirm', 'status'], function (err, data) {
             if (err) {
                 console.log(err);
             }
-
-            console.log(data);
 
             res.render('my-orders', {orders: data});
         });
