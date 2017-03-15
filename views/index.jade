@@ -1,6 +1,13 @@
 extends ./base
 
 block main-content
-    div(class="background")
-        a(class="btn btn-primary btn-lg" href="/order" role="button") Направи поръчка онлайн
-        a(class="btn btn-primary btn-lg" href="/contact" role="button") Контакти
+    div(id="myCarousel" class="carousel slide" data-ride="carousel")
+        div(class="carousel-inner" role="listbox")
+            div(class="item top-image")
+                div(class="container")
+                    div(class="carousel-caption")
+                        h1 One more for good measure
+                        p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        p
+                            a(class="btn btn-lg btn-primary" href="/order"  role="button") Направи поръчка онлайн
+                            a(class="btn btn-lg btn-primary" href="/contact"  role="button") Контакти
