@@ -1,20 +1,15 @@
 extends ./base
 block main-content
-    h1 Регистрация на нов потребител
-    form(method="post" action="/users/create")
-        div(class="form-group")
-            label(for="username") Име
-            input(type="text" class="form-control" id="username" name="username")
-        div(class="form-group")
-            label(for="password") Парола
-            input(type="password" class="form-control" id="password" name="password")
-        div(class="form-group")
-            label(for="confirm-password") Повтори паролата
-            input(type="confirm-password" class="form-control" id="confirm-password" name="confirm-password")
-        div(class="form-group")
-            label(for="first-name") Име
-            input(type="text" class="form-control" id="first-name" name="first-name")
-        div(class="form-group")
-            label(for="last-name") Фамилия
-            input(type="text" class="form-control" id="last-name" name="last-name")
-        input(type="submit" class="btn btn-primary" value="Регистрация")
+    form(method="post" action="/users/create" class="form-signin")
+        h2(class="form-signin-heading") Регистрация
+        label(for="username" class="sr-only") Име
+        input(type="text" class="form-control" id="username" name="username" placeholder="Име" required autofocus)
+        label(for="password" class="sr-only") Парола
+        input(type="password" class="form-control" id="password" name="password" placeholder="Парола" required)
+        label(for="confirm-password" class="sr-only") Повтори парола
+        input(type="confirm-password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Повтори парола" required)
+        label(for="first-name" class="sr-only") Собствено име
+        input(type="text" class="form-control" id="first-name" name="first-name" placeholder="Собствено име" required)
+        label(for="last-name" class="sr-only") Фамилия
+        input(type="text" class="form-control" id="last-name" name="last-name" placeholder="Фамилия" required)
+        button(type="submit" class="btn btn-lg btn-primary btn-block") Регистрация

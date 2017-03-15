@@ -1,11 +1,12 @@
 extends ./base
 block main-content
-    h1 Вход за потребители
-    form(method="post" action="/users/authenticate")
-        div(class="form-group")
-            label(for="username") Име
-            input(type="text" class="form-control" id="username" name="username")
-        div(class="form-group")
-            label(for="password") Парола
-            input(type="password" class="form-control" id="password" name="password")
-        input(type="submit" class="btn btn-primary" value="Влез")
+    form(method="post" action="/users/authenticate" class="form-signin")
+        h2(class="form-signin-heading") Вход за потребители
+        label(for="username" class="sr-only") Име
+        input(type="text" class="form-control" id="username" name="username" placeholder="Име" required autofocus)
+        label(for="password" class="sr-only") Парола
+        input(type="password" class="form-control" id="password" name="password" placeholder="Парола" required)
+        div(class="checkbox")
+            label
+                <input type="checkbox" value="remember-me"> Remember me
+        button(type="submit" class="btn btn-lg btn-primary btn-block") Влез

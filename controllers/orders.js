@@ -111,6 +111,22 @@ let OrdersController = {
 
             res.render('my-orders', {orders: data});
         });
+    },
+
+    viewOrder: (req, res) => {
+        Order.findOne({'_id': req.params.id}, function (err, order) {
+            if (err) {
+                console.log(err);
+            }
+
+            //todo: make generic function that checks permissions
+            if (order.userId.toString() != req.user._id.toString()) {
+                res.render('custom-error-page', {message: 'No permissions'});
+            }
+            else {
+                res.render('order-view', {order: order});
+            }
+        });
     }
 };
 module.exports = OrdersController;

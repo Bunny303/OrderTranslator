@@ -1,17 +1,19 @@
 extends ./base
 block main-content
-    each order in orders
-        p #{order.sampleText}
-            -var confirm = order.confirm;
-            if confirm
-                p Поръчката е потвърдена
-                -var status = order.status;
-                if status == 1
-                    p Няма превод
-                else if status == 2
-                    p В процес на превеждане
-                else
-                    p Завършен превод
-            else
-                p Поръчката не е потвърдена
-        br
+    div(class="list-group")
+        each order in orders
+            a(href="order/view/" + order._id class="list-group-item")
+                div
+                    h4(class="list-group-item-heading") #{order.sampleText}
+                    -var confirm = order.confirm;
+                    if confirm
+                        p(class="list-group-item-text") Поръчката е потвърдена
+                        -var status = order.status;
+                        if status == 1
+                            p(class="list-group-item-text") Няма превод
+                        else if status == 2
+                            p(class="list-group-item-text") В процес на превеждане
+                        else
+                            p(class="list-group-item-text") Завършен превод
+                    else
+                        p(class="list-group-item-text") Поръчката не е потвърдена

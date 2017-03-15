@@ -22,6 +22,7 @@ let Routes = (app) => {
     app.post('/order-create', auth.isAuthenticated, controllers.orders.create);
     app.get('/order', controllers.orders.prepareDocument);
     app.get('/my-orders', controllers.orders.getUserOrders);
+    app.get('/order/view/:id', controllers.orders.viewOrder);
 
 
     app.all('*', (req, res) => {

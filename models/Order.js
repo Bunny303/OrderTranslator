@@ -5,6 +5,7 @@ let requiredValidationMessage = '{PATH} is required';
 let orderSchema = mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     userText: {type: String, required: requiredValidationMessage},
+    translatedText: String,
     sampleText: String,
     fromLanguage: String,
     toLanguage: String,
@@ -13,6 +14,7 @@ let orderSchema = mongoose.Schema({
     confirm: Boolean,
     create_dt: {type: Date, default: Date.now},
     update_dt: {type: Date, default: Date.now},
+    //timestamps: { createdAt: 'created_dt', updatedAt: 'updated_dt' },
     confirm_dt: Date,
     status: {
         type: Number,
