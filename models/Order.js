@@ -21,4 +21,15 @@ let orderSchema = mongoose.Schema({
     }
 });
 
+//orderSchema.method({
+//    authenticate: function (password) {
+//        let inputHashedPassword = CryptoHelper.generateHashedPassword(this.salt, password);
+//        if (inputHashedPassword === this.hashedPass) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//});
+
 let Order = mongoose.model('Order', orderSchema);
