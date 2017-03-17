@@ -1,7 +1,12 @@
 extends ./base
 block main-content
-    include order-display
+    div.container
+        div.row
+            div(class="col-md-6 col-md-offset-3")
+                include order-display
+                div(class='space-input')
+                div(class="checkbox")
+                    label
+                        <input type="checkbox" value="remember-me"> Съгласен съм с <a href="/terms">Общите условия</a>
 
-    input(type="checkbox" name="terms")
-    span I agree with the terms
-    a Pay & Confirm Order
+                button(class="btn btn-success") Потвърди и плати поръчката
