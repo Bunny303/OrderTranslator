@@ -55,7 +55,6 @@ let OrdersController = {
                     userId: req.user._id,
                     userText: userText,
                     sampleText: userText.substr(0, 100),
-                    fromLanguage: data.fromLanguage,
                     toLanguage: data.toLanguage,
                     qualityLevel: data.qualityLevel,
                     userComment: data.userComment,

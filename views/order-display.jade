@@ -1,5 +1,9 @@
-ul
-    li брой думи: <span id="words-count">#{wordsCount || 0}</span>
-    li ниво на трудност: <span id="quality-level">#{qualityLevel}</span>
-    li цена на дума: <span id="price-per-word">#{pricePerWord}</span>лв
-    li Обща цена: <span id="total-price">#{totalPrice}</span>лв
+h3 Вашата поръчка
+hr
+ul(class="order-summary")
+    li Брой думи: <strong class="pull-right" id="words-count">#{wordsCount || 0}</strong>
+    li Ниво на трудност: <strong class="pull-right" id="quality-level">#{qualityLevel}</strong>
+    li Цена на дума: <strong class="pull-right"><strong id="price-per-word">#{pricePerWord}</strong>лв.</strong>
+hr
+p
+    strong Обща цена: <span class="pull-right"><span id="total-price">#{totalPrice}</span>лв.</span>

@@ -1,28 +1,29 @@
 extends ./base
 
 block main-content
-    form(action="contact/send" method="post" id="contact-form")
-        h2(class="form-signin-heading") Свържете се с нас
-        p Кажете ни от какво имате нужда и ние ще се свържем с вас при първа възможност
+    div.container
+        form(action="contact/send" method="post" id="contact-form")
+            h2(class="form-signin-heading") Свържете се с нас
+            p Кажете ни от какво имате нужда и ние ще се свържем с вас при първа възможност
 
-        label(for="username" class="sr-only") Име
-        input(type="text" class="form-control" id="username" name="username" placeholder="Име *" required data-error="Няма въведено име")
-        div(class="help-block with-errors")
+            label(for="username" class="sr-only") Име
+            input(type="text" class="form-control" id="username" name="username" placeholder="Име *" required data-error="Няма въведено име")
+            div(class="help-block with-errors")
 
-        label(for="email" class="sr-only") Електронна поща
-        input(type="text" class="form-control" id="email" name="email" placeholder="Електронна поща *" required data-error="Няма въведена електронна поща")
-        div(class="help-block with-errors")
+            label(for="email" class="sr-only") Електронна поща
+            input(type="text" class="form-control" id="email" name="email" placeholder="Електронна поща *" required data-error="Няма въведена електронна поща")
+            div(class="help-block with-errors")
 
-        label(for="subject" class="sr-only") Заглавие
-        input(type="text" class="form-control" id="subject" name="subject" placeholder="Заглавие *" required data-error="Няма въведено заглавие")
-        div(class="help-block with-errors")
+            label(for="subject" class="sr-only") Заглавие
+            input(type="text" class="form-control" id="subject" name="subject" placeholder="Заглавие *" required data-error="Няма въведено заглавие")
+            div(class="help-block with-errors")
 
-        label(for="description" class="sr-only") Описание
-        textarea(type="text" class="form-control" id="description" rows="4" name="description" placeholder="Описание *" required data-error="Няма въведено описание")
-        div(class="help-block with-errors")
+            label(for="description" class="sr-only") Описание
+            textarea(type="text" class="form-control" id="description" rows="4" name="description" placeholder="Описание *" required data-error="Няма въведено описание")
+            div(class="help-block with-errors")
 
-        input(type="submit" class="btn btn-success" value="Изпрати")
+            input(type="submit" class="btn btn-success" value="Изпрати")
 
-    div(class="row")
-        div(class="col-md-12")
-            p(class="text-muted") * Задължителни полета
+        div(class="row")
+            div(class="col-md-12")
+                p(class="text-muted") * Задължителни полета

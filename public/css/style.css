@@ -154,3 +154,20 @@
     opacity: 0.65;
     background-color: #333333;
 }
+
+.help-paragraph {
+    /*text-align: center;*/
+    padding-top: 15px;
+}
+
+.space-input {
+    padding-top: 30px;
+}
+
+.order-summary {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+
+

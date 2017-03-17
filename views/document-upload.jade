@@ -1,77 +1,84 @@
 extends ./base
 block main-content
-    div(class="row")
-        div(class="col-xs-12 col-md-8")
-            form(name="createOrder", action="/order-create", method="post", enctype="multipart/form-data")
-                h2 Стъпка 1 Въведи текст или добави файл
-                textarea(id="userText" name="userText") Type your text here...
+    div.container
+        div(class="row")
+            div(class="col-xs-12 col-sm-8")
+                form(name="createOrder", action="/order-create", method="post", enctype="multipart/form-data")
+                    h3 Стъпка 1 Въведете текст или добавете файл
+                    textarea(type="text" class="form-control" id="userText" rows="6" name="userText" placeholder="Въведете вашия текст...")
 
-                - let qualityLevel = "Стандартно";
-                - let pricePerWord = 0.05;
-                - let totalPrice = Number(((wordsCount ||0)* pricePerWord).toFixed(2));
+                    - let qualityLevel = "Стандартно";
+                    - let pricePerWord = 0.05;
+                    - let totalPrice = Number(((wordsCount ||0)* pricePerWord).toFixed(2));
 
-                script.
-                    $("#userText").on('keyup', function () {
-                        var words = this.value.match(/\S+/g).length;
-                        $('#words-count').text(words);
-                        wordsCount = words;
-                        $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
-                    });
+                    p(class="help-paragraph") или добавете файл
+                    input(type="file" id="user-document" name="userDocument" )
 
-                input(type="file" id="user-document" name="userDocument")
+                    script.
+                        $("#user-document").change(function (ev) {
+                            var file = ev.target.files[0];
+                            if (file) {
+                                var reader = new FileReader();
 
-                script.
-                    $("#user-document").change(function (ev) {
-                        var file = ev.target.files[0];
-                        if (file) {
-                            var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    var contents = e.target.result;
+                                    var res = contents.split(" ");
+                                    wordsCount = res.length;
+                                    $('#words-count').text(wordsCount);
+                                };
 
-                            reader.onload = function (e) {
-                                var contents = e.target.result;
-                                var res = contents.split(" ");
-                                wordsCount = res.length;
-                                $('#words-count').text(wordsCount);
-                            };
+                                reader.readAsText(file);
 
-                            reader.readAsText(file);
-                        }
-                    });
+                                //disable text input
+                                // $("#userText").attr("disabled", true);
+                            }
+                            else {
+                                // $("#userText").attr("disabled", false);
+                            }
+                        });
 
-                h2 Стъпка 2 Избери език
-                - var languages = ["Френски", "Български"];
-                div#from-language
-                    p Преведи от
-                    select(class="form-control" name="fromLanguage")
-                        each language in languages
-                            option(value="#{language}") #{language}
-                div#to-language
-                    p Преведи на
+                        $("#userText").on('keyup', function () {
+                            var words = this.value.match(/\S+/g).length;
+                            $('#words-count').text(words);
+                            wordsCount = words;
+                            $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
+
+                            //disable file input, because user can input text or file, but not both of them
+                            //$("#user-document").prop("disabled", true);
+                        });
+
+                    div(class='space-input')
+                    h3 Стъпка 2 Изберете език на превода
+                    - var languages = ["Френски", "Български", "Английски"];
                     select(class="form-control" name="toLanguage")
                         each language in languages
                             option(value="#{language}") #{language}
 
-                h2 Стъпка 3 Избери ниво на трудност
-                div
-                    - let levels = ["Стандартно", "Техническо"];
-                    select(class="form-control" id="quality-level-container" name="qualityLevel")
-                        each level in levels
-                            option(value="#{level}") #{level}
+                    div(class='space-input')
+                    h3 Стъпка 3 Изберете ниво на трудност
+                    div
+                        - let levels = ["Стандартно", "Техническо"];
+                        select(class="form-control" id="quality-level-input" name="qualityLevel")
+                            each level in levels
+                                option(value="#{level}") #{level}
 
-                script.
-                    $("#quality-level-container").on('change', function () {
-                        qualityLevel = $(this).val();
-                        $('#quality-level').text(qualityLevel);
-                        if (qualityLevel == 'Стандартно') {
-                            pricePerWord = 0.05;
-                        }
-                        else {
-                            pricePerWord = 0.07;
-                        }
+                    script.
+                        $("#quality-level-input").on('change', function () {
+                            qualityLevel = $(this).val();
+                            $('#quality-level').text(qualityLevel);
+                            if (qualityLevel == 'Стандартно') {
+                                pricePerWord = 0.05;
+                            }
+                            else {
+                                pricePerWord = 0.07;
+                            }
 
-                        $('#price-per-word').text(pricePerWord);
-                        $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
-                    });
-                input(type="submit" class="btn btn-primary" value="Направи заявка")
+                            $('#price-per-word').text(pricePerWord);
+                            $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
+                        });
 
-        div(class="col-xs-6 col-md-4")
-            include order-display
+                    div(class='space-input')
+                    input(type="submit" class="btn btn-success" value="Направи заявка")
+
+            div(class="col-xs-12 col-sm-4")
+                include order-display
