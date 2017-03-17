@@ -1,3 +1,13 @@
 extends ./base
 block main-content
-    div #{order.userText}
+    div(class="row")
+        if(order.translatedText)
+            div(class="col-xs-12 col-md-6")
+                div(class="text-view pre-scrollable") #{order.userText}
+                div(class="text-view pre-scrollable") #{order.translatedText}
+        else
+            div(class="col-xs-12 col-md-6")
+                div(class="text-view pre-scrollable") #{order.userText}
+    div(class="row")
+        div(class="col-xs-12 col-md-4")
+            include order-display

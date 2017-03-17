@@ -10,10 +10,10 @@ block main-content
                         p(class="list-group-item-text") Поръчката е потвърдена
                         -var status = order.status;
                         if status == 1
-                            p(class="list-group-item-text") Няма превод
+                            p(class="list-group-item-text text-danger") Няма превод
                         else if status == 2
-                            p(class="list-group-item-text") В процес на превеждане
+                            p(class="list-group-item-text text-warning") В процес на превеждане
                         else
-                            p(class="list-group-item-text") Завършен превод
+                            p(class="list-group-item-text text-success") Завършен превод
                     else
-                        p(class="list-group-item-text") Поръчката не е потвърдена
+                        p(class="list-group-item-text text-danger") Поръчката не е потвърдена

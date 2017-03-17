@@ -12,42 +12,44 @@ html(lang="bg")
         link(rel="stylesheet" href="/css/style.css")
         script(src="/js/bootstrap.min.js")
     body
+        div.nav-bg-wrapper
+            div.container
+                div.navbar-wrapper
+                    nav(class="navbar navbar-default")
+                        div(class="container-fluid")
+                            div(class="navbar-header")
+                                button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+                                    span(class="sr-only") Toggle navigation
+                                    span(class="icon-bar")
+                                    span(class="icon-bar")
+                                    span(class="icon-bar")
+                                a(class="navbar-brand" href="/") LOGO
+                            div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                                ul(class="nav navbar-nav")
+                                    li(class="active")
+                                        a(href="/") Начало
+                                    li
+                                        a(href="/order") Направи поръчка
+                                    if (currentUser)
+                                        li
+                                            a(href="/my-orders") Моите поръчки
+                                    li
+                                        a(href="/contact") Контакти
+                                ul(class="nav navbar-nav navbar-right")
+                                    if (currentUser)
+                                        li
+                                            a(href="/profile") Настойки профил
+                                        li
+                                            a(href="/users/logout") Изход
+                                    else
+                                        li
+                                            a(href="/users/login") Вход
+                                        li
+                                            a(href="/users/register") Регистрация
+
+        block main-content
+
+        <!-- Site footer -->
         div.container
-            div.navbar-wrapper
-                nav(class="navbar navbar-default")
-                    div(class="container-fluid")
-                        div(class="navbar-header")
-                            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
-                                span(class="sr-only") Toggle navigation
-                                span(class="icon-bar")
-                                span(class="icon-bar")
-                                span(class="icon-bar")
-                            a(class="navbar-brand" href="/") LOGO
-                        div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-                            ul(class="nav navbar-nav")
-                                li(class="active")
-                                    a(href="/") Начало
-                                //li
-                                //    a(href="/order") Направи поръчка
-                                if (currentUser)
-                                    li
-                                        a(href="/my-orders") Моите поръчки
-                                li
-                                    a(href="/contact") Контакти
-                            ul(class="nav navbar-nav navbar-right")
-                                if (currentUser)
-                                    li
-                                        a(href="/profile") Настойки профил
-                                    li
-                                        a(href="/users/logout") Изход
-                                else
-                                    li
-                                        a(href="/users/login") Вход
-                                    li
-                                        a(href="/users/register") Регистрация
-
-            block main-content
-
-            <!-- Site footer -->
-            footer(class="footer")
+            footer(class="footer text-center")
                 p &copy; 2016 Company, Inc.
