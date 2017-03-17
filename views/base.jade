@@ -16,40 +16,38 @@ html(lang="bg")
             div.container
                 div.navbar-wrapper
                     nav(class="navbar navbar-default")
-                        div(class="container-fluid")
-                            div(class="navbar-header")
-                                button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
-                                    span(class="sr-only") Toggle navigation
-                                    span(class="icon-bar")
-                                    span(class="icon-bar")
-                                    span(class="icon-bar")
-                                a(class="navbar-brand" href="/") LOGO
-                            div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-                                ul(class="nav navbar-nav")
-                                    li(class="active")
-                                        a(href="/") Начало
+                        div(class="navbar-header")
+                            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+                                span(class="sr-only") Toggle navigation
+                                span(class="icon-bar")
+                                span(class="icon-bar")
+                                span(class="icon-bar")
+                            a(class="navbar-brand" href="/") LOGO
+                        div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                            ul(class="nav navbar-nav")
+                                li(class="active")
+                                    a(href="/") Начало
+                                li
+                                    a(href="/order") Нова поръчка
+                                if (currentUser)
                                     li
-                                        a(href="/order") Нова поръчка
-                                    if (currentUser)
-                                        li
-                                            a(href="/my-orders") Моите поръчки
+                                        a(href="/my-orders") Моите поръчки
+                                li
+                                    a(href="/contact") Контакти
+                            ul(class="nav navbar-nav navbar-right")
+                                if (currentUser)
                                     li
-                                        a(href="/contact") Контакти
-                                ul(class="nav navbar-nav navbar-right")
-                                    if (currentUser)
-                                        li
-                                            a(href="/profile") Настойки профил
-                                        li
-                                            a(href="/users/logout") Изход
-                                    else
-                                        li
-                                            a(href="/users/login") Вход
-                                        li
-                                            a(href="/users/register") Регистрация
-
-        block main-content
+                                        a(href="/profile") Настойки профил
+                                    li
+                                        a(href="/users/logout") Изход
+                                else
+                                    li
+                                        a(href="/users/login") Вход
+                                    li
+                                        a(href="/users/register") Регистрация
+        div.site-content
+            block main-content
 
         <!-- Site footer -->
-        div.container
-            footer(class="footer text-center")
-                p &copy; 2017 Company, Inc.
+        footer(class="footer text-center")
+            div &copy; 2017 Company, Inc.

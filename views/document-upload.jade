@@ -5,7 +5,7 @@ block main-content
             div(class="col-xs-12 col-sm-8")
                 form(name="createOrder", action="/order-create", method="post", enctype="multipart/form-data")
                     h3 Стъпка 1 Въведете текст или добавете файл
-                    textarea(type="text" class="form-control" id="userText" rows="6" name="userText" placeholder="Въведете вашия текст...")
+                    textarea(type="text" class="form-control" id="userText" rows="6" name="userText" placeholder="Въведете текст...")
 
                     - let qualityLevel = "Стандартно";
                     - let pricePerWord = 0.05;

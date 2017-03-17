@@ -113,7 +113,7 @@ let OrdersController = {
     },
 
     viewOrder: (req, res) => {
-        Order.findOne({'_id': req.params.id}, ['userId', 'userText', 'translatedText', 'qualityLevel'], function (err, order) {
+        Order.findOne({'_id': req.params.id}, /*['userId', 'userText', 'translatedText', 'qualityLevel', 'cre'], */function (err, order) {
             if (err) {
                 console.log(err);
             }
