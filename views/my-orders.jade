@@ -5,15 +5,4 @@ block main-content
             a(href="order/view/" + order._id class="list-group-item")
                 div
                     h4(class="list-group-item-heading") #{order.sampleText}
-                    -var confirm = order.confirm;
-                    if confirm
-                        p(class="list-group-item-text") Поръчката е потвърдена
-                        -var status = order.status;
-                        if status == 1
-                            p(class="list-group-item-text text-danger") Няма превод
-                        else if status == 2
-                            p(class="list-group-item-text text-warning") В процес на превеждане
-                        else
-                            p(class="list-group-item-text text-success") Завършен превод
-                    else
-                        p(class="list-group-item-text text-danger") Поръчката не е потвърдена
+                    include order-status

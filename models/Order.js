@@ -7,6 +7,7 @@ let orderSchema = mongoose.Schema({
     userText: {type: String, required: requiredValidationMessage},
     translatedText: String,
     sampleText: String,
+    wordsCount: Number,
     fromLanguage: String,
     toLanguage: String,
     qualityLevel: {type: String, required: requiredValidationMessage},

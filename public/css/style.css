@@ -180,5 +180,9 @@ body {
     padding-left: 0;
 }
 
+.initial-text-container {
+    display: none;
+}
+
 
 

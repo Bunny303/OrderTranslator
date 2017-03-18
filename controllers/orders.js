@@ -59,7 +59,8 @@ let OrdersController = {
                     qualityLevel: data.qualityLevel,
                     userComment: data.userComment,
                     confirm: false,
-                    status: 1
+                    status: 1,
+                    wordsCount: wordsCount
                 };
 
                 Order.create(order, function (err, savedOrder) {
@@ -113,7 +114,7 @@ let OrdersController = {
     },
 
     viewOrder: (req, res) => {
-        Order.findOne({'_id': req.params.id}, /*['userId', 'userText', 'translatedText', 'qualityLevel', 'cre'], */function (err, order) {
+        Order.findOne({'_id': req.params.id}, function (err, order) {
             if (err) {
                 console.log(err);
             }

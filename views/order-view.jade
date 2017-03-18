@@ -1,20 +1,43 @@
 extends ./base
 block main-content
-    div(class="row")
-        if(order.translatedText)
-            div(class="col-xs-12 col-md-6")
-                //div(class="text-view pre-scrollable") #{order.userText}
-                //div(class="text-view pre-scrollable") #{order.translatedText}
-        else
-            div(class="col-xs-12 col-md-6")
-                //div(class="text-view pre-scrollable") #{order.userText}
-    div(class="row")
-        div(class="col-xs-12 col-md-4")
-            include order-display
+    div.container
+        div(class="row")
+            div(class="col-xs-12 col-sm-6")
+                include order-display
+            div(class="col-xs-12 col-sm-6")
+                br
+                br
+                br
+                include order-status
+                br
+                p Дата на създаване: #{(order.create_dt).toLocaleString()}
+        br
 
-    p Статус #{order.status}
-    p Дата на създаване #{order.create_dt}
-    p Потрърдена поръчка #{order.confirm}
+        div(class="row")
+            div(class="col-xs-12 col-sm-6")
+                div(class="panel panel-success")
+                    div(class="panel-heading clearfix")
+                        span Оригинален текст
+                        button(class="btn btn-sm btn-success initial-text-btn pull-right") Покажи текста
+                    div(class="panel-body initial-text-container") #{order.userText}
+            div(class="col-xs-12 col-sm-6")
+                div(class="panel panel-success")
+                    div(class="panel-heading clearfix")
+                        span Преведен текст
+                        button(class="btn btn-sm btn-success initial-text-btn pull-right") Покажи текста
+                    div(class="panel-body initial-text-container") #{order.translatedText}
 
-    button(class="initial-text-btn")
-    div(class="initial-text-container") #{order.userText}
+        script.
+            $(".initial-text-btn").click(function () {
+                let $this = $(this);
+                let $text = $this.parent().siblings(".initial-text-container");
+                let showClass = "is-expanded";
+
+                if ($text.hasClass(showClass)) {
+                    $text.slideUp('fast').removeClass(showClass);
+                    $this.text("Покажи текста");
+                } else {
+                    $text.slideDown('fast').addClass(showClass);
+                    $this.text("Скрий текста");
+                }
+            });
