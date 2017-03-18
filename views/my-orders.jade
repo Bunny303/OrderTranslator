@@ -1,8 +1,19 @@
 extends ./base
 block main-content
-    div(class="list-group")
-        each order in orders
-            a(href="order/view/" + order._id class="list-group-item")
-                div
-                    h4(class="list-group-item-heading") #{order.sampleText}
-                    include order-status
+    div.container
+        br
+        br
+        br
+        div(class="list-group")
+            each order in orders
+                a(href="order/view/" + order._id class="list-group-item")
+                    div
+                        h4(class="list-group-item-heading") #{order.sampleText}
+                        include order-status
+
+        //nav
+        //    ul(class="pagination")
+        //        li
+        //            a(href="#") Previous
+        //        li
+        //            a(href="#") Next
