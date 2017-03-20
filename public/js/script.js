@@ -5,7 +5,10 @@
     let qualityLevel = standartLevelString;
     let pricePerWord = standartLevelPrice;
     let wordsCount = 0;
-    let totalPrice = Number((wordsCount * pricePerWord).toFixed(2));
+
+    function calculateTotalPrice(wordsCount, pricePerWord) {
+        return Number((wordsCount * pricePerWord).toFixed(2));
+    }
 
     $("#user-document").change(function (ev) {
         var file = ev.target.files[0];
@@ -29,11 +32,11 @@
         }
     });
 
-    $("#userText").on('keyup', function () {
+    $("#userText").bind('input propertychange', function () {
         var words = this.value.match(/\S+/g).length;
         $('#words-count').text(words);
         wordsCount = words;
-        $('#total-price').text(totalPrice);
+        $('#total-price').text(calculateTotalPrice(wordsCount, pricePerWord));
 
         //disable file input, because user can input text or file, but not both of them
         //$("#user-document").prop("disabled", true);
@@ -50,6 +53,6 @@
         }
 
         $('#price-per-word').text(pricePerWord);
-        $('#total-price').text(totalPrice);
+        $('#total-price').text(calculateTotalPrice(wordsCount, pricePerWord));
     });
 }());
