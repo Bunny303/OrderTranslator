@@ -16,6 +16,16 @@ body {
     background-color: #eeeeee;
 }
 
+.footer ul {
+    list-style-type: none;
+    float: right;
+    padding-right: 20px;
+}
+
+.nav-footer a {
+    color: #333;
+}
+
 .form-signin {
     max-width: 330px;
     padding: 15px;

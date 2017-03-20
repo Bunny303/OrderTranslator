@@ -5,52 +5,22 @@ block main-content
             div(class="col-xs-12 col-sm-8")
                 form(name="createOrder", action="/order-create", method="post", enctype="multipart/form-data")
                     h3 Стъпка 1 Въведете текст или добавете файл
-                    textarea(type="text" class="form-control" id="userText" rows="6" name="userText" placeholder="Въведете текст...")
+                    textarea(type="text" class="form-control" id="userText" rows="6" name="userText" placeholder="Въведете текст..." maxlength="3750")
 
                     - let qualityLevel = "Стандартно";
                     - let pricePerWord = 0.05;
+                    - let wordsCount = 0;
                     - let totalPrice = Number(((wordsCount ||0)* pricePerWord).toFixed(2));
 
-                    p(class="help-paragraph") или добавете файл
-                    input(type="file" id="user-document" name="userDocument" )
+                    p(class="help-paragraph") или добавете текстов файл по-малък от 16Mb
+                    input(type="file" id="user-document" name="userDocument" accept=".txt,.doc,.docx,.odt,.rtf")
 
-                    script.
-                        $("#user-document").change(function (ev) {
-                            var file = ev.target.files[0];
-                            if (file) {
-                                var reader = new FileReader();
 
-                                reader.onload = function (e) {
-                                    var contents = e.target.result;
-                                    var res = contents.split(" ");
-                                    wordsCount = res.length;
-                                    $('#words-count').text(wordsCount);
-                                };
-
-                                reader.readAsText(file);
-
-                                //disable text input
-                                // $("#userText").attr("disabled", true);
-                            }
-                            else {
-                                // $("#userText").attr("disabled", false);
-                            }
-                        });
-
-                        $("#userText").on('keyup', function () {
-                            var words = this.value.match(/\S+/g).length;
-                            $('#words-count').text(words);
-                            wordsCount = words;
-                            $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
-
-                            //disable file input, because user can input text or file, but not both of them
-                            //$("#user-document").prop("disabled", true);
-                        });
 
                     div(class='space-input')
                     h3 Стъпка 2 Изберете език на превода
                     - var languages = ["Френски", "Български", "Английски"];
-                    select(class="form-control" name="toLanguage")
+                    select(class="form-control" name="toLanguage" required)
                         each language in languages
                             option(value="#{language}") #{language}
 
@@ -58,7 +28,7 @@ block main-content
                     h3 Стъпка 3 Изберете ниво на трудност
                     div
                         - let levels = ["Стандартно", "Техническо"];
-                        select(class="form-control" id="quality-level-input" name="qualityLevel")
+                        select(class="form-control" id="quality-level-input" name="qualityLevel" required)
                             each level in levels
                                 option(value="#{level}") #{level}
 
@@ -77,6 +47,9 @@ block main-content
                             $('#total-price').text(Number(((wordsCount || 0) * pricePerWord).toFixed(2)));
                         });
 
+                    div(class='space-input')
+                    h3 Допълнителен коментар
+                    textarea(type="text" class="form-control" rows="4" name="userComment" maxlength="1500")
                     div(class='space-input')
                     input(type="submit" class="btn btn-success" value="Направи заявка")
 

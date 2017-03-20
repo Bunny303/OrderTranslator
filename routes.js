@@ -6,6 +6,7 @@ let Routes = (app) => {
     app.get('/', controllers.home.index);
     app.get('/contact', controllers.home.contact);
     app.post('/contact/send', controllers.home.sendMessage);
+    app.get('/terms', controllers.home.getTerms);
 
     //user routes
     app.get('/users/register', controllers.users.register);
@@ -23,7 +24,6 @@ let Routes = (app) => {
     app.get('/order', controllers.orders.prepareDocument);
     app.get('/my-orders', controllers.orders.getUserOrders);
     app.get('/order/view/:id', controllers.orders.viewOrder);
-
 
     app.all('*', (req, res) => {
         res.status(404);

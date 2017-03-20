@@ -7,6 +7,9 @@ let HomeController = {
     contact: (req, res) => {
         res.render('contact');
     },
+    getTerms: (req, res) => {
+        res.render('terms');
+    },
     sendMessage: (req, res) => {
         //Setup Nodemailer transport, I chose gmail. Create an application-specific password to avoid problems.
         //todo: check other options

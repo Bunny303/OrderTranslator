@@ -2,7 +2,10 @@
 const async = require('async');
 const fs = require('fs');
 let Order = require('mongoose').model('Order');
-
+const path = require('path');
+const standartLevelString = 'Стандартно';
+const standartLevelPrice = 0.05;
+const highLevelPrice = 0.07;
 let OrdersController = {
     create: (req, res) => {
         let data, file;
@@ -29,7 +32,21 @@ let OrdersController = {
             function (callback) {
                 var wordsCount;
                 if (file) {
-                    //todo: counting the words should be done only in one place, now it's done on front-end and on back-end
+
+                    //check file size
+                    if (file.size > (16 * 1024 * 1024)) {
+                        return callback(new Error('Filze size is bigger then 16Mb'));
+                    }
+
+                    //check file type
+                    let allowedExt = ['.txt', '.doc', '.docx', '.odt', '.rtf'];
+                    let ext = path.extname(file.originalname);
+
+                    if (allowedExt.indexOf(ext) == -1) {
+                        return callback(new Error('File type is not supported'));
+                    }
+
+                    //todo: counting the words probably should be done only in one place, now it's done on front-end and on back-end
                     fs.readFile(file.path, {encoding: 'utf-8'}, function (err, data) {
                         if (err) {
                             callback(err);
@@ -73,17 +90,17 @@ let OrdersController = {
             }
         ], function (err, wordsCount) {
             if (err) {
-                console.log(err);
+                return res.render('custom-error-page', {message: err});
             }
 
             var qualityLevel = data.qualityLevel;
             //todo: use numbers instead of strings
-            if (qualityLevel == 'Стандартно') {
+            if (qualityLevel == standartLevelString) {
                 //todo: fix prices to be constants
-                pricePerWord = 0.05;
+                pricePerWord = standartLevelPrice;
             }
             else {
-                pricePerWord = 0.07;
+                pricePerWord = highLevelPrice;
             }
 
             totalPrice = Number(pricePerWord * wordsCount).toFixed(2);
@@ -95,12 +112,15 @@ let OrdersController = {
                 totalPrice: totalPrice
             });
         });
-
-
     },
 
     prepareDocument: (req, res) => {
-        res.render('document-upload');
+        res.render('document-upload', {
+            'qualityLevel': standartLevelString,
+            'pricePerWord': standartLevelPrice,
+            'wordsCount': 0,
+            'totalPrice': 0
+        });
     },
 
     getUserOrders: (req, res) => {
@@ -120,6 +140,7 @@ let OrdersController = {
             }
 
             //todo: make generic function that checks permissions
+            //todo: throws error if there is not req.user
             if (order.userId.toString() != req.user._id.toString()) {
                 res.render('custom-error-page', {message: 'No permissions'});
             }
