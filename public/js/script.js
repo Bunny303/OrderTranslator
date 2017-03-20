@@ -1,20 +1,16 @@
 (function () {
-    let qualityLevel = "Стандартно";
-    let pricePerWord = 0.05;
+    const standartLevelString = 'Стандартно';
+    const standartLevelPrice = 0.05;
+    const highLevelPrice = 0.07;
+    let qualityLevel = standartLevelString;
+    let pricePerWord = standartLevelPrice;
     let wordsCount = 0;
-    let totalPrice = Number(((wordsCount || 0) * pricePerWord).toFixed(2));
-
-    console.log('1111111111111', $("#user-document").length);
+    let totalPrice = Number((wordsCount * pricePerWord).toFixed(2));
 
     $("#user-document").change(function (ev) {
-        console.log('2222222222');
-
         var file = ev.target.files[0];
         if (file) {
             var reader = new FileReader();
-
-            console.log('3333333333333');
-
 
             reader.onload = function (e) {
                 var contents = e.target.result;
@@ -31,5 +27,29 @@
         else {
             // $("#userText").attr("disabled", false);
         }
+    });
+
+    $("#userText").on('keyup', function () {
+        var words = this.value.match(/\S+/g).length;
+        $('#words-count').text(words);
+        wordsCount = words;
+        $('#total-price').text(totalPrice);
+
+        //disable file input, because user can input text or file, but not both of them
+        //$("#user-document").prop("disabled", true);
+    });
+
+    $("#quality-level-input").on('change', function () {
+        qualityLevel = $(this).val();
+        $('#quality-level').text(qualityLevel);
+        if (qualityLevel == standartLevelString) {
+            pricePerWord = standartLevelPrice;
+        }
+        else {
+            pricePerWord = highLevelPrice;
+        }
+
+        $('#price-per-word').text(pricePerWord);
+        $('#total-price').text(totalPrice);
     });
 }());
