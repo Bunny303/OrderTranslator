@@ -1,4 +1,3 @@
-//const FileManageHelper = require('../helpers/FileManageHelper');
 const async = require('async');
 const fs = require('fs');
 let Order = require('mongoose').model('Order');
@@ -95,6 +94,7 @@ let OrdersController = {
 
             var qualityLevel = data.qualityLevel;
             //todo: use numbers instead of strings
+            //todo: extract function, DRY!!!
             if (qualityLevel == standartLevelString) {
                 //todo: fix prices to be constants
                 pricePerWord = standartLevelPrice;
@@ -146,7 +146,18 @@ let OrdersController = {
                 res.render('custom-error-page', {message: 'No permissions'});
             }
             else {
-                res.render('order-view', {order: order});
+                let pricePerWord;
+                if (order.qualityLevel == standartLevelString) {
+                    //todo: fix prices to be constants
+                    pricePerWord = standartLevelPrice;
+                }
+                else {
+                    pricePerWord = highLevelPrice;
+                }
+
+                let totalPrice = Number(pricePerWord * order.wordsCount).toFixed(2);
+
+                res.render('order-view', {order: order, pricePerWord: pricePerWord, totalPrice: totalPrice});
             }
         });
     },
