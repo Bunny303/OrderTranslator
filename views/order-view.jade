@@ -11,6 +11,10 @@ block main-content
                 include order-status
                 br
                 p Дата на създаване: #{(order.create_dt).toLocaleString()}
+                br
+                br
+                a(class="btn btn-danger" href="/order/delete/" + "#{order._id}") Изтрий поръчката
+                a(class="btn btn-success landing-btn" href="/order/pay/" + "#{order._id}") Плати поръчката
         br
 
         div(class="row")

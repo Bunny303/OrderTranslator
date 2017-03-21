@@ -148,6 +148,50 @@ let OrdersController = {
                 res.render('order-view', {order: order});
             }
         });
+    },
+
+    deleteOrder: (req, res) => {
+        Order.findOne({'_id': req.params.id}, ['userId'], function (err, order) {
+            if (err) {
+                console.log(err);
+            }
+
+            //todo: make generic function that checks permissions
+            //todo: throws error if there is not req.user
+            if (order.userId.toString() != req.user._id.toString()) {
+                res.render('custom-error-page', {message: 'No permissions'});
+            }
+            else {
+                //delete order
+                order.remove();
+                res.redirect('/my-orders');
+            }
+        });
+    },
+
+    payOrder: (req, res) => {
+        Order.findOne({'_id': req.params.id}, function (err, order) {
+            if (err) {
+                console.log(err);
+            }
+
+            //todo: make generic function that checks permissions
+            //todo: throws error if there is not req.user
+            if (order.userId.toString() != req.user._id.toString()) {
+                res.render('custom-error-page', {message: 'No permissions'});
+            }
+            else {
+                //change status and pay
+                order.confirm = true;
+                order.save(function (err, updatedOrder) {
+                    if (err) {
+                        console.log(err);
+                    }
+
+                    res.render('order-view', {order: updatedOrder});
+                });
+            }
+        });
     }
 };
 module.exports = OrdersController;

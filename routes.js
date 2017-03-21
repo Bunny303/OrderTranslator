@@ -24,6 +24,8 @@ let Routes = (app) => {
     app.get('/order', controllers.orders.prepareDocument);
     app.get('/my-orders', controllers.orders.getUserOrders);
     app.get('/order/view/:id', controllers.orders.viewOrder);
+    app.get('/order/delete/:id', controllers.orders.deleteOrder);
+    app.get('/order/pay/:id', controllers.orders.payOrder);
 
     app.all('*', (req, res) => {
         res.status(404);
