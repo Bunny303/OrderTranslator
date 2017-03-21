@@ -22,10 +22,10 @@ let Routes = (app) => {
     //order routes
     app.post('/order-create', auth.isAuthenticated, controllers.orders.create);
     app.get('/order', controllers.orders.prepareDocument);
-    app.get('/my-orders', controllers.orders.getUserOrders);
-    app.get('/order/view/:id', controllers.orders.viewOrder);
-    app.get('/order/delete/:id', controllers.orders.deleteOrder);
-    app.get('/order/pay/:id', controllers.orders.payOrder);
+    app.get('/my-orders', auth.isAuthenticated, controllers.orders.getUserOrders);
+    app.get('/order/view/:id', auth.isAuthenticated, controllers.orders.viewOrder);
+    app.get('/order/delete/:id', auth.isAuthenticated, controllers.orders.deleteOrder);
+    app.get('/order/pay/:id', auth.isAuthenticated, controllers.orders.payOrder);
 
     app.all('*', (req, res) => {
         res.status(404);

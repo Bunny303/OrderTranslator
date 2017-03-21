@@ -85,10 +85,10 @@ let OrdersController = {
                         callback(err);
                     }
 
-                    callback(null, wordsCount);
+                    callback(null, wordsCount, savedOrder._id);
                 });
             }
-        ], function (err, wordsCount) {
+        ], function (err, wordsCount, orderId) {
             if (err) {
                 return res.render('custom-error-page', {message: err});
             }
@@ -109,7 +109,8 @@ let OrdersController = {
                 wordsCount: wordsCount,
                 qualityLevel: qualityLevel,
                 pricePerWord: pricePerWord,
-                totalPrice: totalPrice
+                totalPrice: totalPrice,
+                orderId: orderId
             });
         });
     },
@@ -157,7 +158,6 @@ let OrdersController = {
             }
 
             //todo: make generic function that checks permissions
-            //todo: throws error if there is not req.user
             if (order.userId.toString() != req.user._id.toString()) {
                 res.render('custom-error-page', {message: 'No permissions'});
             }
@@ -176,7 +176,6 @@ let OrdersController = {
             }
 
             //todo: make generic function that checks permissions
-            //todo: throws error if there is not req.user
             if (order.userId.toString() != req.user._id.toString()) {
                 res.render('custom-error-page', {message: 'No permissions'});
             }
