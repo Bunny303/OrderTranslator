@@ -24,36 +24,29 @@ let orderSchema = mongoose.Schema({
     }
 });
 
-orderSchema.pre('save', function (next) {
-    var self = this;
-
-    Order.findOne({_id: this.id}, 'userId', function (err, result) {
-        if (err) {
-            next(err);
-        }
-        else {
-            if (result && result.userId.toString() != self.userId.toString()) {
-                var err = new Error('NO PERMISSIONS');
-                next(err);
-            }
-            else {
-                //if there is no result then order is not created yet
-                //or in cas eof update user id is the same as logged user id
-                next();
-            }
-        }
-    });
-});
-
-//orderSchema.method({
-//    authenticate: function (password) {
-//        let inputHashedPassword = CryptoHelper.generateHashedPassword(this.salt, password);
-//        if (inputHashedPassword === this.hashedPass) {
-//            return true;
-//        } else {
-//            return false;
+//orderSchema.pre('save', function (next) {
+//    var self = this;
+//
+//    Order.findOne({_id: this.id}, 'userId', function (err, result) {
+//        if (err) {
+//            next(err);
 //        }
-//    }
+//        else {
+//            if (result && result.userId.toString() != self.userId.toString()) {
+//                var err = new Error('NO PERMISSIONS');
+//                next(err);
+//            }
+//            else {
+//                //if there is no result then order is not created yet
+//                //or in cas eof update user id is the same as logged user id
+//                next();
+//            }
+//        }
+//    });
+//});
+
+//orderSchema.pre('update', function() {
+//    this.update({},{ $set: { update_dt: new Date() } });
 //});
 
 let Order = mongoose.model('Order', orderSchema);

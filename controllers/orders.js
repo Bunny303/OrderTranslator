@@ -5,6 +5,8 @@ const path = require('path');
 const standartLevelString = 'Стандартно';
 const standartLevelPrice = 0.05;
 const highLevelPrice = 0.07;
+const errorConfig = require('../config/errors');
+
 let OrdersController = {
     create: (req, res) => {
         let data, file;
@@ -34,7 +36,7 @@ let OrdersController = {
 
                     //check file size
                     if (file.size > (16 * 1024 * 1024)) {
-                        return callback(new Error('Filze size is bigger then 16Mb'));
+                        return callback(new Error(errorConfig.oversizeFile));
                     }
 
                     //check file type
@@ -42,7 +44,7 @@ let OrdersController = {
                     let ext = path.extname(file.originalname);
 
                     if (allowedExt.indexOf(ext) == -1) {
-                        return callback(new Error('File type is not supported'));
+                        return callback(new Error(errorConfig.notSupportedFileType));
                     }
 
                     //todo: counting the words probably should be done only in one place, now it's done on front-end and on back-end
@@ -89,10 +91,11 @@ let OrdersController = {
             }
         ], function (err, wordsCount, orderId) {
             if (err) {
-                return res.render('custom-error-page', {message: err});
+                return res.render('document-upload', {error: err.message});
             }
 
-            var qualityLevel = data.qualityLevel;
+            let qualityLevel = data.qualityLevel;
+            let pricePerWord;
             //todo: use numbers instead of strings
             //todo: extract function, DRY!!!
             if (qualityLevel == standartLevelString) {
@@ -103,7 +106,7 @@ let OrdersController = {
                 pricePerWord = highLevelPrice;
             }
 
-            totalPrice = Number(pricePerWord * wordsCount).toFixed(2);
+            let totalPrice = Number(pricePerWord * wordsCount).toFixed(2);
 
             res.render('order-create', {
                 wordsCount: wordsCount,

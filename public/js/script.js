@@ -2,6 +2,7 @@
     const standartLevelString = 'Стандартно';
     const standartLevelPrice = 0.05;
     const highLevelPrice = 0.07;
+    const duplicateTextError = "Текст и файл не могат да бъдат въведени в една поръчка"
     let qualityLevel = standartLevelString;
     let pricePerWord = standartLevelPrice;
     let wordsCount = 0;
@@ -13,33 +14,35 @@
     $("#user-document").change(function (ev) {
         var file = ev.target.files[0];
         if (file) {
-            var reader = new FileReader();
+            //check if there is input text already
+            if (!$("#userText").val()) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var contents = e.target.result;
+                    var res = contents.split(" ");
+                    wordsCount = res.length;
+                    $('#words-count').text(wordsCount);
+                };
 
-            reader.onload = function (e) {
-                var contents = e.target.result;
-                var res = contents.split(" ");
-                wordsCount = res.length;
-                $('#words-count').text(wordsCount);
-            };
-
-            reader.readAsText(file);
-
-            //disable text input
-            // $("#userText").attr("disabled", true);
-        }
-        else {
-            // $("#userText").attr("disabled", false);
+                reader.readAsText(file);
+            }
+            else {
+                $(".error-container").text(duplicateTextError);
+            }
         }
     });
 
     $("#userText").bind('input propertychange', function () {
-        var words = this.value.match(/\S+/g).length;
-        $('#words-count').text(words);
-        wordsCount = words;
-        $('#total-price').text(calculateTotalPrice(wordsCount, pricePerWord));
-
-        //disable file input, because user can input text or file, but not both of them
-        //$("#user-document").prop("disabled", true);
+        //check if there is input file already
+        if ($("#user-document").files.length == 0) {
+            var words = this.value.match(/\S+/g).length;
+            $('#words-count').text(words);
+            wordsCount = words;
+            $('#total-price').text(calculateTotalPrice(wordsCount, pricePerWord));
+        }
+        else {
+            $(".error-container").text(duplicateTextError);
+        }
     });
 
     $("#quality-level-input").on('change', function () {
