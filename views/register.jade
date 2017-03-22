@@ -2,14 +2,15 @@ extends ./base
 block main-content
     form(method="post" action="/users/create" class="form-signin")
         h2(class="form-signin-heading") Регистрация
+        p(class="error-container text-danger") #{error}
         label(for="username" class="sr-only") Име
         input(type="text" class="form-control" id="username" name="username" placeholder="Име" required autofocus)
         label(for="password" class="sr-only") Парола
         input(type="password" class="form-control" id="password" name="password" placeholder="Парола" required)
-        label(for="confirm-password" class="sr-only") Повтори парола
-        input(type="confirm-password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Повтори парола" required)
-        label(for="first-name" class="sr-only") Собствено име
-        input(type="text" class="form-control" id="first-name" name="first-name" placeholder="Собствено име" required)
-        label(for="last-name" class="sr-only") Фамилия
-        input(type="text" class="form-control" id="last-name" name="last-name" placeholder="Фамилия" required)
+        label(for="confirmPassword" class="sr-only") Повтори парола
+        input(type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Повтори парола" required)
+        label(for="firstName" class="sr-only") Собствено име
+        input(type="text" class="form-control" id="first-name" name="firstName" placeholder="Собствено име" required)
+        label(for="lastName" class="sr-only") Фамилия
+        input(type="text" class="form-control" id="last-name" name="lastName" placeholder="Фамилия" required)
         button(type="submit" class="btn btn-lg btn-success btn-block") Регистрация

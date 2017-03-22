@@ -2,6 +2,7 @@ extends ./base
 block main-content
     form(method="post" action="/users/authenticate" class="form-signin")
         h2(class="form-signin-heading") Вход за потребители
+        p(class="error-container text-danger") #{error}
         label(for="username" class="sr-only") Име
         input(type="text" class="form-control" id="username" name="username" placeholder="Име" required autofocus)
         label(for="password" class="sr-only") Парола
