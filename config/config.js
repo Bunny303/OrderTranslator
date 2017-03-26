@@ -8,7 +8,7 @@ let config = {
 
     production: {
         db: process.env.MONGODB_URI,
-        port: process.env.port,
+        port: process.env.PORT,
         redis_host: process.env.REDISTOGO_URL,
         redis_port: process.env.redis_port
     }
