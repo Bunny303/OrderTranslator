@@ -123,7 +123,8 @@ let OrdersController = {
             'qualityLevel': standartLevelString,
             'pricePerWord': standartLevelPrice,
             'wordsCount': 0,
-            'totalPrice': 0
+            'totalPrice': 0,
+            'active': 'new-order'
         });
     },
 
@@ -133,7 +134,7 @@ let OrdersController = {
                 console.log(err);
             }
 
-            res.render('my-orders', {orders: data});
+            res.render('my-orders', {orders: data, active: 'my-orders'});
         });
     },
 

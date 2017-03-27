@@ -25,14 +25,14 @@ html(lang="bg")
                             a(class="navbar-brand" href="/") LOGO
                         div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
                             ul(class="nav navbar-nav")
-                                li(class="active")
+                                li(class=active == 'home' ? 'active' : undefined)
                                     a(href="/") Начало
-                                li
+                                li(class=active == 'new-order' ? 'active' : undefined)
                                     a(href="/order") Нова поръчка
                                 if (currentUser)
-                                    li
+                                    li(class=active == 'my-orders' ? 'active' : undefined)
                                         a(href="/my-orders") Моите поръчки
-                                li
+                                li(class=active == 'contact' ? 'active' : undefined)
                                     a(href="/contact") Контакти
                             ul(class="nav navbar-nav navbar-right")
                                 if (currentUser)

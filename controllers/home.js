@@ -2,10 +2,10 @@ const nodemailer = require('nodemailer');
 
 let HomeController = {
     index: (req, res) => {
-        res.render('index');
+        res.render('index', {'active': 'home'});
     },
     contact: (req, res) => {
-        res.render('contact');
+        res.render('contact', {'active': 'contact'});
     },
     getTerms: (req, res) => {
         res.render('terms');
