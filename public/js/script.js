@@ -34,7 +34,8 @@
 
     $("#userText").bind('input propertychange', function () {
         //check if there is input file already
-        if ($("#user-document").files.length == 0) {
+        var $uploadedDoc = $("#user-document");
+        if (!$uploadedDoc.files || $uploadedDoc.files.length == 0) {
             var words = this.value.match(/\S+/g).length;
             $('#words-count').text(words);
             wordsCount = words;
