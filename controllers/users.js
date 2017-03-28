@@ -1,14 +1,18 @@
 const CryptoHelper = require('../helpers/CryptoHelper');
 const errorConfig = require('../config/errors');
 let User = require('mongoose').model('User');
+const langHelperer = require('../helpers/LanguageHelper');
+const stringsConfig = require('../config/strings');
 
 let UsersController = {
     register: (req, res) => {
-        res.render('register');
+        let lang = langHelperer.getLanguage(req.session);
+        res.render('register', {active: 'register', navStr: stringsConfig.navigation[lang]});
     },
 
     login: (req, res) => {
-        res.render('login');
+        let lang = langHelperer.getLanguage(req.session);
+        res.render('login', {active: 'login', navStr: stringsConfig.navigation[lang]});
     },
 
     logout: (req, res) => {

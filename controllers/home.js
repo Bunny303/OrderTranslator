@@ -1,8 +1,11 @@
 const nodemailer = require('nodemailer');
+const stringsConfig = require('../config/strings');
+const langHelperer = require('../helpers/LanguageHelper');
 
 let HomeController = {
     index: (req, res) => {
-        res.render('index', {'active': 'home'});
+        let lang = langHelperer.getLanguage(req.session);
+        res.render('index', {'active': 'home', navStr: stringsConfig.navigation[lang]});
     },
     contact: (req, res) => {
         res.render('contact', {'active': 'contact'});

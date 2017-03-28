@@ -6,7 +6,7 @@ html(lang="bg")
         meta(name="viewport" content="width=device-width, initial-scale=1")
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         meta(name="description" content="Бързи и надеждни преводи от и на френски език")
-        title Професионални преводи
+        title #{navStr.title}
         script(src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
         link(rel="stylesheet" href="/css/bootstrap.min.css")
         link(rel="stylesheet" href="/css/style.css")
@@ -26,25 +26,25 @@ html(lang="bg")
                         div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
                             ul(class="nav navbar-nav")
                                 li(class=active == 'home' ? 'active' : undefined)
-                                    a(href="/") Начало
+                                    a(href="/") #{navStr.home}
                                 li(class=active == 'new-order' ? 'active' : undefined)
-                                    a(href="/order") Нова поръчка
+                                    a(href="/order") #{navStr.newOrder}
                                 if (currentUser)
                                     li(class=active == 'my-orders' ? 'active' : undefined)
-                                        a(href="/my-orders") Моите поръчки
+                                        a(href="/my-orders") #{navStr.myOrders}
                                 li(class=active == 'contact' ? 'active' : undefined)
-                                    a(href="/contact") Контакти
+                                    a(href="/contact") #{navStr.contact}
                             ul(class="nav navbar-nav navbar-right")
                                 if (currentUser)
                                     li
-                                        a(href="/profile") Настойки профил
+                                        a(href="/profile") #{navStr.settings}
                                     li
-                                        a(href="/users/logout") Изход
+                                        a(href="/users/logout") #{navStr.logout}
                                 else
                                     li
-                                        a(href="/users/login") Вход
+                                        a(href="/users/login") #{navStr.login}
                                     li
-                                        a(href="/users/register") Регистрация
+                                        a(href="/users/register") #{navStr.register}
         div.site-content
             block main-content
 
