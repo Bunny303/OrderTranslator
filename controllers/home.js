@@ -5,7 +5,11 @@ const langHelperer = require('../helpers/LanguageHelper');
 let HomeController = {
     index: (req, res) => {
         let lang = langHelperer.getLanguage(req.session);
-        res.render('index', {'active': 'home', navStr: stringsConfig.navigation[lang]});
+        res.render('index', {
+            'active': 'home',
+            navStr: stringsConfig.navigation[lang],
+            indexStr: stringsConfig.index[lang]
+        });
     },
     contact: (req, res) => {
         let lang = langHelperer.getLanguage(req.session);
