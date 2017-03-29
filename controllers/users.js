@@ -107,6 +107,8 @@ let UsersController = {
                         return;
                     }
 
+                    req.session.lang = 'bg';
+
                     let redirectUrl = req.session.redirectUrl;
                     //if redirect url exist then after login we should redirect to previous page
                     if (redirectUrl) {

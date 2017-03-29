@@ -8,7 +8,12 @@ let HomeController = {
         res.render('index', {'active': 'home', navStr: stringsConfig.navigation[lang]});
     },
     contact: (req, res) => {
-        res.render('contact', {'active': 'contact'});
+        let lang = langHelperer.getLanguage(req.session);
+        res.render('contact', {
+            'active': 'contact',
+            navStr: stringsConfig.navigation[lang],
+            contactStr: stringsConfig.contact[lang]
+        });
     },
     getTerms: (req, res) => {
         res.render('terms');

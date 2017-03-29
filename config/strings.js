@@ -23,6 +23,20 @@ let stringsConfig = {
             settings: 'Settings'
         }
     },
+    contact: {
+        bg: {
+            header: 'Свържете се с нас',
+            subHeader: 'Кажете ни от какво имате нужда и ние ще се свържем с вас при първа възможност',
+            name: 'Име',
+            email: 'Електронна поща',
+            header: 'Заглавие',
+            description: 'Описание',
+            submit: 'Изпрати',
+            requiredFields: 'Задължителни полета'
+        },
+        en: {}
+    },
+    footer: {},
     index: {}
 };
 
