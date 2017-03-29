@@ -40,18 +40,25 @@ let HomeController = {
             subject: req.body.subject,
             text: req.body.description
         };
+        let lang = langHelperer.getLanguage(req.session);
         transporter.sendMail(message, function (err, response) {
             //Email not sent
             if (err) {
 
                 console.log(err.message);
 
-                res.render('message-sent', {msg: 'Възникна грешка, съобщението не е изпратено.'});
+                res.render('message-sent', {
+                    navStr: stringsConfig.navigation[lang],
+                    msg: stringsConfig.messageSent[lang].msgNegative
+                });
                 return;
             }
 
             transporter.close();
-            res.render('message-sent', {msg: 'Съобщението е изпратено успешно!'});
+            res.render('message-sent', {
+                navStr: stringsConfig.navigation[lang],
+                msg: stringsConfig.messageSent[lang].msgPositive
+            });
         });
     }
 };

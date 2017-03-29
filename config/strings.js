@@ -45,6 +45,12 @@ let stringsConfig = {
             buttonTwo: 'Контакти'
         },
         en: {}
+    },
+    messageSent: {
+        bg: {
+            msgPositive: 'Съобщението е изпратено успешно!',
+            msgNegative: 'Възникна грешка, съобщението не е изпратено.'
+        }
     }
 };
 
