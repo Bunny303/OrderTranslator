@@ -6,6 +6,8 @@ const standartLevelString = 'Стандартно';
 const standartLevelPrice = 0.05;
 const highLevelPrice = 0.07;
 const errorConfig = require('../config/errors');
+const langHelperer = require('../helpers/LanguageHelper');
+const stringsConfig = require('../config/strings');
 
 let OrdersController = {
     create: (req, res) => {
@@ -119,7 +121,10 @@ let OrdersController = {
     },
 
     prepareDocument: (req, res) => {
+        let lang = langHelperer.getLanguage(req.session);
         res.render('document-upload', {
+            navStr: stringsConfig.navigation[lang],
+            contentStr: stringsConfig.documentUpload[lang],
             'qualityLevel': standartLevelString,
             'pricePerWord': standartLevelPrice,
             'wordsCount': 0,

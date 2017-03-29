@@ -51,6 +51,22 @@ let stringsConfig = {
             msgPositive: 'Съобщението е изпратено успешно!',
             msgNegative: 'Възникна грешка, съобщението не е изпратено.'
         }
+    },
+    documentUpload: {
+        bg: {
+            stepOneHeader: 'Стъпка 1 Въведете текст или добавете файл',
+            textarea: 'Въведете текст...',
+            commentStepOne: 'или добавете текстов файл по-малък от 16Mb',
+            stepTwoHeader: 'Стъпка 2 Изберете език на превода',
+            stepThreeHeader: 'Стъпка 3 Изберете ниво на трудност',
+            french: 'Френски',
+            english: 'Английски',
+            bulgarian: 'Български',
+            standartLevel: 'Стандартно',
+            highLevel: 'Техническо',
+            comment: 'Допълнителен коментар',
+            button: 'Направи заявка'
+        }
     }
 };
 
