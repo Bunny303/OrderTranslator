@@ -33,7 +33,15 @@ let stringsConfig = {
             submit: 'Изпрати',
             requiredFields: 'Задължителни полета'
         },
-        en: {}
+        en: {
+            header: 'Contact us',
+            subHeader: 'Tell us what you need and we will contact you as soon as possible',
+            name: 'Name',
+            email: 'Email',
+            description: 'Description',
+            submit: 'Send',
+            requiredFields: 'Required fields'
+        }
     },
     footer: {},
     index: {
@@ -43,12 +51,21 @@ let stringsConfig = {
             buttonOne: 'Направи поръчка',
             buttonTwo: 'Контакти'
         },
-        en: {}
+        en: {
+            header: 'Make your translations fast and quality',
+            subHeader: 'Translation of documents, technical literature and others from French to Bulgarian and from Bulgarian to French',
+            buttonOne: 'Order now',
+            buttonTwo: 'Contacts'
+        }
     },
     messageSent: {
         bg: {
             msgPositive: 'Съобщението е изпратено успешно!',
             msgNegative: 'Възникна грешка, съобщението не е изпратено.'
+        },
+        en: {
+            msgPositive: 'Your message has been sent!',
+            msgNegative: 'Error, your message was not sent'
         }
     },
     documentUpload: {
@@ -65,6 +82,20 @@ let stringsConfig = {
             highLevel: 'Техническо',
             comment: 'Допълнителен коментар',
             button: 'Направи заявка'
+        },
+        en: {
+            stepOneHeader: 'Step 1 Input your text or upload your file',
+            textarea: 'Input your text...',
+            commentStepOne: 'or upload your file with size less than 16Mb',
+            stepTwoHeader: 'Step 2 Choose translation language',
+            stepThreeHeader: 'Step 3 Choose quality level',
+            french: 'French',
+            english: 'English',
+            bulgarian: 'Bulgarian',
+            standartLevel: 'Standard',
+            highLevel: 'Technical',
+            comment: 'Additional comment',
+            button: 'Order'
         }
     },
     oderDisplay: {
@@ -75,6 +106,14 @@ let stringsConfig = {
             totalPriceStr: 'Обща цена:',
             currency: 'лв.',
             header: 'Вашата поръчка'
+        },
+        en: {
+            wordsCountStr: 'Words count:',
+            qualityLevelStr: 'Quality level:',
+            pricePerWordStr: 'Price per word:',
+            totalPriceStr: 'Total price:',
+            currency: 'lv.',
+            header: 'Your order'
         }
     }
 };
