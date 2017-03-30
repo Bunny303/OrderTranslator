@@ -1,12 +1,12 @@
-h3 Вашата поръчка
+h3 #{orderDisplayStr.header}
 hr
 ul(class="order-summary")
     if (order)
         - wordsCount = order.wordsCount;
         - qualityLevel = order.qualityLevel;
-    li Брой думи: <strong class="pull-right" id="words-count">#{wordsCount}</strong>
-    li Ниво на трудност: <strong class="pull-right" id="quality-level">#{qualityLevel}</strong>
-    li Цена на дума: <strong class="pull-right"><strong id="price-per-word">#{pricePerWord}</strong>лв.</strong>
+    li #{orderDisplayStr.wordsCountStr} <strong class="pull-right" id="words-count">#{wordsCount}</strong>
+    li #{orderDisplayStr.qualityLevelStr} <strong class="pull-right" id="quality-level">#{qualityLevel}</strong>
+    li #{orderDisplayStr.pricePerWordStr} <strong class="pull-right"><strong id="price-per-word">#{pricePerWord}</strong>#{orderDisplayStr.currency}</strong>
 hr
 p
-    strong Обща цена: <span class="pull-right"><span id="total-price">#{totalPrice}</span>лв.</span>
+    strong #{orderDisplayStr.totalPriceStr} <span class="pull-right"><span id="total-price">#{totalPrice}</span>#{orderDisplayStr.currency}</span>

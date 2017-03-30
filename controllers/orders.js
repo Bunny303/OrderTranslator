@@ -125,6 +125,7 @@ let OrdersController = {
         res.render('document-upload', {
             navStr: stringsConfig.navigation[lang],
             contentStr: stringsConfig.documentUpload[lang],
+            orderDisplayStr: stringsConfig.oderDisplay[lang],
             'qualityLevel': standartLevelString,
             'pricePerWord': standartLevelPrice,
             'wordsCount': 0,
@@ -139,7 +140,8 @@ let OrdersController = {
                 console.log(err);
             }
 
-            res.render('my-orders', {orders: data, active: 'my-orders'});
+            let lang = langHelperer.getLanguage(req.session);
+            res.render('my-orders', {orders: data, active: 'my-orders', navStr: stringsConfig.navigation[lang]});
         });
     },
 

@@ -29,7 +29,6 @@ let stringsConfig = {
             subHeader: 'Кажете ни от какво имате нужда и ние ще се свържем с вас при първа възможност',
             name: 'Име',
             email: 'Електронна поща',
-            header: 'Заглавие',
             description: 'Описание',
             submit: 'Изпрати',
             requiredFields: 'Задължителни полета'
@@ -66,6 +65,16 @@ let stringsConfig = {
             highLevel: 'Техническо',
             comment: 'Допълнителен коментар',
             button: 'Направи заявка'
+        }
+    },
+    oderDisplay: {
+        bg: {
+            wordsCountStr: 'Брой думи:',
+            qualityLevelStr: 'Ниво на трудност:',
+            pricePerWordStr: 'Цена на дума:',
+            totalPriceStr: 'Обща цена:',
+            currency: 'лв.',
+            header: 'Вашата поръчка'
         }
     }
 };
