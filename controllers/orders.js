@@ -121,7 +121,7 @@ let OrdersController = {
     },
 
     prepareDocument: (req, res) => {
-        let lang = langHelperer.getLanguage(req.session);
+        let lang = langHelperer.getLanguage(req.cookies);
         res.render('document-upload', {
             navStr: stringsConfig.navigation[lang],
             contentStr: stringsConfig.documentUpload[lang],
@@ -140,7 +140,7 @@ let OrdersController = {
                 console.log(err);
             }
 
-            let lang = langHelperer.getLanguage(req.session);
+            let lang = langHelperer.getLanguage(req.cookies);
             res.render('my-orders', {orders: data, active: 'my-orders', navStr: stringsConfig.navigation[lang]});
         });
     },

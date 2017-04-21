@@ -1,7 +1,7 @@
 let LanguageHelper = {
-    getLanguage: function (session) {
-        if (session && session.lang) {
-            return session.lang;
+    getLanguage: function (cookies) {
+        if (cookies && cookies.lang) {
+            return cookies.lang;
         }
         return 'en';
     }

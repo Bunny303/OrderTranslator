@@ -12,14 +12,14 @@
     }
 
     $("#user-document").change(function (ev) {
-        var file = ev.target.files[0];
+        let file = ev.target.files[0];
         if (file) {
             //check if there is input text already
             if (!$("#userText").val()) {
-                var reader = new FileReader();
+                let reader = new FileReader();
                 reader.onload = function (e) {
-                    var contents = e.target.result;
-                    var res = contents.split(" ");
+                    let contents = e.target.result;
+                    let res = contents.split(" ");
                     wordsCount = res.length;
                     $('#words-count').text(wordsCount);
                 };
@@ -34,9 +34,9 @@
 
     $("#userText").bind('input propertychange', function () {
         //check if there is input file already
-        var $uploadedDoc = $("#user-document");
+        let $uploadedDoc = $("#user-document");
         if (!$uploadedDoc.files || $uploadedDoc.files.length == 0) {
-            var words = this.value.match(/\S+/g).length;
+            let words = this.value.match(/\S+/g).length;
             $('#words-count').text(words);
             wordsCount = words;
             $('#total-price').text(calculateTotalPrice(wordsCount, pricePerWord));
@@ -58,5 +58,12 @@
 
         $('#price-per-word').text(pricePerWord);
         $('#total-price').text(calculateTotalPrice(wordsCount, pricePerWord));
+    });
+
+    $("#btn-language").on('change', function () {
+        let lang = $(this).val();
+
+        //$('#btn-language option[value=' + lang + ']').attr('selected', 'selected');
+        document.cookie = "lang=" + lang + " ; path=/";
     });
 }());

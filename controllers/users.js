@@ -6,12 +6,12 @@ const stringsConfig = require('../config/strings');
 
 let UsersController = {
     register: (req, res) => {
-        let lang = langHelperer.getLanguage(req.session);
+        let lang = langHelperer.getLanguage(req.cookies);
         res.render('register', {active: 'register', navStr: stringsConfig.navigation[lang]});
     },
 
     login: (req, res) => {
-        let lang = langHelperer.getLanguage(req.session);
+        let lang = langHelperer.getLanguage(req.cookies);
         res.render('login', {active: 'login', navStr: stringsConfig.navigation[lang]});
     },
 
@@ -106,8 +106,6 @@ let UsersController = {
                         res.render('login', {error: errorConfig.tryAgain});
                         return;
                     }
-
-                    req.session.lang = 'en';
 
                     let redirectUrl = req.session.redirectUrl;
                     //if redirect url exist then after login we should redirect to previous page

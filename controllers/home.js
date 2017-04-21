@@ -4,7 +4,7 @@ const langHelperer = require('../helpers/LanguageHelper');
 
 let HomeController = {
     index: (req, res) => {
-        let lang = langHelperer.getLanguage(req.session);
+        let lang = langHelperer.getLanguage(req.cookies);
         res.render('index', {
             'active': 'home',
             navStr: stringsConfig.navigation[lang],
@@ -12,7 +12,7 @@ let HomeController = {
         });
     },
     contact: (req, res) => {
-        let lang = langHelperer.getLanguage(req.session);
+        let lang = langHelperer.getLanguage(req.cookies);
         res.render('contact', {
             'active': 'contact',
             navStr: stringsConfig.navigation[lang],
@@ -40,7 +40,7 @@ let HomeController = {
             subject: req.body.subject,
             text: req.body.description
         };
-        let lang = langHelperer.getLanguage(req.session);
+        let lang = langHelperer.getLanguage(req.cookies);
         transporter.sendMail(message, function (err, response) {
             //Email not sent
             if (err) {

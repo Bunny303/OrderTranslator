@@ -45,6 +45,11 @@ html(lang="bg")
                                         a(href="/users/login") #{navStr.login}
                                     li
                                         a(href="/users/register") #{navStr.register}
+                                li
+                                    select(class="form-control" id="btn-language")
+                                        option(value="fr") French
+                                        option(value="en") English
+                                        option(value="bg") Bulgarian
         div.site-content
             block main-content
 
