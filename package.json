@@ -25,7 +25,8 @@
 
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "mocha": "*"
   },
   "engines": {
     "node": "6.10.0"
